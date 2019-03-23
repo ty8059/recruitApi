@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.admn.console.dao.TblUserMapper">
+    <resultMap id="BaseResultMap" type="com.admn.console.model.TblUser">
+        <result column="USER_ID" jdbcType="INTEGER" property="userId"/>
+        <result column="USERNAME" jdbcType="VARCHAR" property="username"/>
+        <result column="USER_PHONE" jdbcType="VARCHAR" property="userPhone"/>
+        <result column="PASSWORD" jdbcType="VARCHAR" property="password"/>
+        <result column="USER_STATUS" jdbcType="VARCHAR" property="userStatus"/>
+        <result column="USER_TYPE" jdbcType="VARCHAR" property="userType"/>
+        <result column="RESERVED1" jdbcType="VARCHAR" property="reserved1"/>
+        <result column="RESERVED2" jdbcType="VARCHAR" property="reserved2"/>
+        <result column="RESERVED3" jdbcType="VARCHAR" property="reserved3"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.admn.console.model.TblUser">
+    insert into TBL_USER (USER_ID, USERNAME, USER_PHONE, 
+      PASSWORD, USER_STATUS, USER_TYPE, 
+      RESERVED1, RESERVED2, RESERVED3
+      )
+    values (#{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{userStatus,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, 
+      #{reserved1,jdbcType=VARCHAR}, #{reserved2,jdbcType=VARCHAR}, #{reserved3,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.admn.console.model.TblUser">
+        insert into TBL_USER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="username != null">
+                USERNAME,
+            </if>
+            <if test="userPhone != null">
+                USER_PHONE,
+            </if>
+            <if test="password != null">
+                PASSWORD,
+            </if>
+            <if test="userStatus != null">
+                USER_STATUS,
+            </if>
+            <if test="userType != null">
+                USER_TYPE,
+            </if>
+            <if test="reserved1 != null">
+                RESERVED1,
+            </if>
+            <if test="reserved2 != null">
+                RESERVED2,
+            </if>
+            <if test="reserved3 != null">
+                RESERVED3,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="userStatus != null">
+                #{userStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="userType != null">
+                #{userType,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved1 != null">
+                #{reserved1,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved2 != null">
+                #{reserved2,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved3 != null">
+                #{reserved3,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

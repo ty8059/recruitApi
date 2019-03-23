@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.admn.console.dao.TblSysCodeMapper">
+    <resultMap id="BaseResultMap" type="com.admn.console.model.TblSysCode">
+        <result column="TYPE_CODE" jdbcType="VARCHAR" property="typeCode"/>
+        <result column="TYPE_CN" jdbcType="VARCHAR" property="typeCn"/>
+        <result column="TYPE_EN" jdbcType="VARCHAR" property="typeEn"/>
+        <result column="DISPLAY1" jdbcType="VARCHAR" property="display1"/>
+        <result column="DISPLAY2" jdbcType="VARCHAR" property="display2"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="SHOW_ID" jdbcType="INTEGER" property="showId"/>
+        <result column="RESERVED1" jdbcType="VARCHAR" property="reserved1"/>
+        <result column="RESERVED2" jdbcType="VARCHAR" property="reserved2"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.admn.console.model.TblSysCode">
+    insert into TBL_SYS_CODE (TYPE_CODE, TYPE_CN, TYPE_EN, 
+      DISPLAY1, DISPLAY2, STATUS, 
+      SHOW_ID, RESERVED1, RESERVED2
+      )
+    values (#{typeCode,jdbcType=VARCHAR}, #{typeCn,jdbcType=VARCHAR}, #{typeEn,jdbcType=VARCHAR}, 
+      #{display1,jdbcType=VARCHAR}, #{display2,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{showId,jdbcType=INTEGER}, #{reserved1,jdbcType=VARCHAR}, #{reserved2,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.admn.console.model.TblSysCode">
+        insert into TBL_SYS_CODE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="typeCode != null">
+                TYPE_CODE,
+            </if>
+            <if test="typeCn != null">
+                TYPE_CN,
+            </if>
+            <if test="typeEn != null">
+                TYPE_EN,
+            </if>
+            <if test="display1 != null">
+                DISPLAY1,
+            </if>
+            <if test="display2 != null">
+                DISPLAY2,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="showId != null">
+                SHOW_ID,
+            </if>
+            <if test="reserved1 != null">
+                RESERVED1,
+            </if>
+            <if test="reserved2 != null">
+                RESERVED2,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="typeCode != null">
+                #{typeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="typeCn != null">
+                #{typeCn,jdbcType=VARCHAR},
+            </if>
+            <if test="typeEn != null">
+                #{typeEn,jdbcType=VARCHAR},
+            </if>
+            <if test="display1 != null">
+                #{display1,jdbcType=VARCHAR},
+            </if>
+            <if test="display2 != null">
+                #{display2,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="showId != null">
+                #{showId,jdbcType=INTEGER},
+            </if>
+            <if test="reserved1 != null">
+                #{reserved1,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved2 != null">
+                #{reserved2,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

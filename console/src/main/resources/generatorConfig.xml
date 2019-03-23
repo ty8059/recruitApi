@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!--指定了驱动jar包的位置-->
+    <classPathEntry
+            location="E:\.m2\repository\mysql\mysql-connector-java\8.0.13\mysql-connector-java-8.0.13.jar" />
+    <context id="recruit" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <!--去除自动生成的注解-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!-- 数据库连接信息 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://101.132.164.250:3306/recruit"
+                        userId="root" password="111111" />
+        <!--entity实体类-->
+        <javaModelGenerator targetPackage="com.admn.console.model"
+                            targetProject="C:\Users\admn\IdeaProjects\recruit\console\src\main\java" />
+
+        <!-- mybatis映射xml文件 -->
+        <sqlMapGenerator targetPackage="mybatis"
+                         targetProject="C:\Users\admn\IdeaProjects\recruit\console\src\main\resources" />
+        <!--mapper接口 -->
+        <javaClientGenerator targetPackage="com.admn.console.dao"
+                             targetProject="C:\Users\admn\IdeaProjects\recruit\console\src\main\java" type="XMLMAPPER" />
+        <!--数据表-->
+        <table tableName="TBL_SYS_CODE"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" />
+
+    </context>
+</generatorConfiguration>
