@@ -8,9 +8,83 @@
                 , layer = layui.layer;
         });
 
+        $.ajax({
+            success: function (result) {
+                $('#userName').val(result.msg);
+            }
+        })
 
     })
 </script>
 <body>
+<form class="layui-form" action=""style="padding-right: 20px;">
+    <div class="layui-form" style="margin-top: 25px">
+        <table>
+            <tr>
+                <td>
+                    <#--岗位名称positionName-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">岗位名称:</label>
+                        <div class="layui-input-block">
+                            <input id="positionName" name="positionName" type="text"  autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <#--用户类型-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">学历</label>
+                        <div class="layui-input-block">
+                            <input id="deGre" name="deGre" type="text"  autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <#--用户姓名-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">姓名</label>
+                        <div class="layui-input-block">
+                            <input id="userName" name="userName" type="text"  autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <#--岗位名称positionName-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">岗位名称:</label>
+                        <div class="layui-input-block">
+                            <input id="positionName" name="positionName" type="text"  autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <#--用户类型-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">学历</label>
+                        <div class="layui-input-block">
+                            <input id="deGre" name="deGre" type="text"  autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <#--用户姓名-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">姓名</label>
+                        <div class="layui-input-block">
+                            <input id="userName" name="userName" type="text"  autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+
+
+
+</form>
 </body>
 </@layout>

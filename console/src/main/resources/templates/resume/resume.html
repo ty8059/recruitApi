@@ -103,13 +103,12 @@
                             layer.msg("请选中一条记录");
                             return;
                         }*/
-
                         layer.open({
                             title: "用户信息"
                             ,type: 2
                             ,icon: 1
-                            ,content: '${ctx}/resume/resumeForm'
-                            ,area: ['500px', '330px']
+                            ,content: '${ctx}/resume/resumeForm?userId=' /*+ data[0].userid*/
+                            ,area: ['800px', '500px']
                             ,btn: ['关闭']
                             ,yes: function(index, layero){
                                 layer.close(index);
@@ -122,63 +121,8 @@
                             layer.msg("请选中一条记录");
                             return;
                         }
-                        layer.msg('确定停用？', {
-                            time: 0
-                            ,btn: ['确定', '取消']
-                            ,yes: function(index){
-                                layer.close(index);
-                                $.ajax({
-                                    url: '${ctx}/user/freeze',
-                                    type: 'post',
-                                    dataType: 'json',
-                                    data: {
-                                        userId: data[0].userId
-                                    },
-                                    success: function(result) {
-                                        layer.msg(result.msg);
-                                        table.reload('dataGrid', {
-                                            where: {
-                                                'username': username,
-                                                'userType': userType,
-                                                'userStatus': userStatus
-                                            }
-                                        });
-                                    }
-                                })
-                            }
-                        });
                         break;
                     case 'recover':
-                        var data = checkStatus.data;
-                        if (data.length === 0) {
-                            layer.msg("请选中一条记录");
-                            return;
-                        }
-                        layer.msg('确定恢复？', {
-                            time: 0
-                            ,btn: ['确定', '取消']
-                            ,yes: function(index){
-                                layer.close(index);
-                                $.ajax({
-                                    url: '${ctx}/user/recover',
-                                    type: 'post',
-                                    dataType: 'json',
-                                    data: {
-                                        userId: data[0].userId
-                                    },
-                                    success: function(result) {
-                                        layer.msg(result.msg);
-                                        table.reload('dataGrid', {
-                                            where: {
-                                                'username': username,
-                                                'userType': userType,
-                                                'userStatus': userStatus
-                                            }
-                                        });
-                                    }
-                                })
-                            }
-                        });
                         break;
                     case 'query':
                         table.reload('dataGrid', {
@@ -223,11 +167,11 @@
     <table>
         <tr>
             <td>
-                <#--用户userName-->
+                <#--岗位名称positionName-->
                 <div class="layui-form-item">
                     <label class="layui-form-label">岗位名称:</label>
                     <div class="layui-input-block">
-                        <input id="username" name="username" type="text" placeholder="请输入岗位名称" autocomplete="off" class="layui-input">
+                        <input id="positionName" name="positionName" type="text" placeholder="请输入岗位名称" autocomplete="off" class="layui-input">
                     </div>
                 </div>
             </td>
@@ -236,7 +180,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">学历</label>
                     <div class="layui-input-block">
-                        <input id="username" name="username" type="text" placeholder="请输入学历" autocomplete="off" class="layui-input">
+                        <input id="deGre" name="deGre" type="text" placeholder="请输入学历" autocomplete="off" class="layui-input">
                     </div>
                 </div>
             </td>
@@ -245,7 +189,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">姓名</label>
                     <div class="layui-input-block">
-                        <input id="username" name="username" type="text" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                        <input id="userName" name="userName" type="text" placeholder="请输入姓名" autocomplete="off" class="layui-input">
                     </div>
                 </div>
             </td>
