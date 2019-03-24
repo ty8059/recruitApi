@@ -1,7 +1,7 @@
-package com.admn.console.service;
+package com.admn.web.service;
 
 import com.admn.common.ResultEntity;
-import com.admn.console.model.TblUser;
+import com.admn.web.model.TblUser;
 
 public interface RegisterService {
 

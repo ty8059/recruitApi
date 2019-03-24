@@ -1,9 +1,9 @@
-package com.admn.console.controller;
+package com.admn.web.controller;
 
 import com.admn.common.ResultEntity;
 import com.admn.common.ResultUtil;
-import com.admn.console.model.TblUser;
-import com.admn.console.service.RegisterService;
+import com.admn.web.model.TblUser;
+import com.admn.web.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;

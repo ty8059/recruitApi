@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
   max-http-header-size: 8192
 
 spring:
@@ -33,7 +33,7 @@ spring:
 mybatis:
   config-location: classpath:mybatis-config.xml
   mapper-locations: classpath:mybatis/*.xml
-  type-aliases-package: com.admn.console.model
+  type-aliases-package: com.admn.web.model
 
 logging:
   config: classpath:logback.xml
