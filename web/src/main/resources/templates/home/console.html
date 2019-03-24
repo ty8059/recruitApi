@@ -1,0 +1,151 @@
+<#include "../_layout.html">
+<@layout>
+<head>
+    <title>控制台</title>
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">商品访问量</div>
+                <div class="layui-card-body layuiadmin-card-list">
+                    <p class="layuiadmin-big-font">${(allViewCount)!"暂无"}</p>
+                    <p>此为总访问量</p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    订单数
+                    <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span>
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+                    <p class="layuiadmin-big-font">${(monthOrderAmount)!"暂无"}</p>
+                    <p>
+                        总订单数
+                        <span class="layuiadmin-span-color">${(allOrderAmount)!"暂无"}<i
+                                    class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    收入
+                    <span class="layui-badge layui-bg-green layuiadmin-badge">月</span>
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+
+                    <p class="layuiadmin-big-font">${(monthMoney)!"暂无"}</p>
+                    <p>
+                        总收入
+                        <span class="layuiadmin-span-color">${(allMoney)!"暂无"}<i
+                                    class="layui-inline layui-icon layui-icon-dollar"></i></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    活跃用户
+                    <span class="layui-badge layui-bg-orange layuiadmin-badge">月</span>
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+
+                    <p class="layuiadmin-big-font">${(monthUserAmount)!"暂无"}</p>
+                    <p>
+                        上一个月
+                        <span class="layuiadmin-span-color">${(lastMonthUserAmount)!"暂无"}<i class="layui-inline layui-icon layui-icon-user"></i></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm12">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    访问量
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row">
+                        <div class="layui-col-sm7">
+                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade"
+                                 lay-filter="LAY-index-pagetwo">
+                                <div id="saleChart" style="height: 332px;width: 900px"></div>
+                            </div>
+                        </div>
+                        <div class="layui-col-sm5">
+                            <div class="layuiadmin-card-list">
+                                <p class="layuiadmin-normal-font">月订单数</p>
+                                <span>同上期增长</span>
+                                <div class="layui-progress layui-progress-big" lay-showPercent="yes">
+                                    <div class="layui-progress-bar" lay-percent="${(orderPlusRate)!"暂无"}%"></div>
+                                </div>
+                            </div>
+                            <div class="layuiadmin-card-list">
+                                <p class="layuiadmin-normal-font">月收入</p>
+                                <span>同上期增长</span>
+                                <div class="layui-progress layui-progress-big" lay-showPercent="yes">
+                                    <div class="layui-progress-bar" lay-percent="${(moneyPlusRate)!"暂无"}%"></div>
+                                </div>
+                            </div>
+                            <div class="layuiadmin-card-list">
+                                <p class="layuiadmin-normal-font">活跃用户</p>
+                                <span>同上期增长</span>
+                                <div class="layui-progress layui-progress-big" lay-showPercent="yes">
+                                    <div class="layui-progress-bar" lay-percent="${(userPlusRate)!"暂无"}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm8">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-sm6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">本周活跃用户列表</div>
+                        <div class="layui-card-body">
+                            <table class="layui-table layuiadmin-page-table" lay-skin="line">
+                                <thead>
+                                <tr>
+                                    <th>用户名</th>
+                                    <th>最后登录时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <#if activeUsers?? && (activeUsers?size > 0)>
+                                    <#list activeUsers as user>
+                                        <tr>
+                                            <td><span>${user.username}</span></td>
+                                            <td><i class="layui-icon layui-icon-log">${(user.reserved1)!"暂无"}</i></td>
+                                        </tr>
+                                    </#list>
+                                </#if>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<script>
+    layui.config({
+        base: '/static/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index',
+    }).use(['index', 'charts']);
+</script>
+</body>
+</@layout>

@@ -1,0 +1,261 @@
+<#include "../_layout.html">
+<@layout>
+<head>
+    <title>用户</title>
+</head>
+<script type="text/javascript">
+    $(function () {
+        layui.use(['form', 'layer', 'table'], function () {
+            var table = layui.table
+                , form = layui.form
+                , layer = layui.layer;
+
+            $.ajax({
+                url: '${ctx}/sysCode/findSysCodeByType',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    type: 'USER_STATUS'
+                },
+                success: function (data) {
+                    $('#userStatus').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#userStatus').append(new Option(item.typeCn, item.display1));// 下拉菜单里添加元素
+                    });
+                    form.render();
+                }
+            });
+
+            $.ajax({
+                url: '${ctx}/sysCode/findSysCodeByType',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    type: 'USER_TYPE'
+                },
+                success: function (data) {
+                    $('#userType').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#userType').append(new Option(item.typeCn, item.display1));// 下拉菜单里添加元素
+                    });
+                    form.render();
+                }
+            });
+
+            table.render({
+                id: 'dataGrid'
+                , elem: '#dataGrid'
+                , url: '${ctx}/user/dataGrid'
+                , toolbar: '#toolbar'
+                , height: 'full-200'
+                , cellMinWidth: 80
+                , cols: [[
+                    {type:'radio'}
+                    , {field: 'userId', title: '用户ID', width: 100, sort: true}
+                    , {field: 'username', title: '用户名', width: 100}
+                    , {field: 'userPhone', title: '手机号', width: 150}
+                    , {field: 'userType', title: '用户类型', width: 100}
+                    , {field: 'userStatus', title: '状态', width: 100}
+                    , {field: 'reserved1', title: '登录时间', width: 200, sort: true}
+                ]]
+                , page: {
+                    layout: ['limit', 'count', 'prev', 'page', 'next']
+                    , groups: 1
+                }
+                , request: {
+                    pageName: 'currPage' //页码的参数名称，默认：page
+                    ,limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                }
+                , response: {
+                    code: 'result' //数据状态的字段名称，默认：code
+                    , count: 'totalCount' //数据总数的字段名称，默认：count
+                }
+                , method:'POST'
+                , loading: true
+                , limit: 10
+                , done: function (res) {
+                    $("[data-field='userStatus']").children().each(function(){
+                        if($(this).text() === '00'){
+                            $(this).text("正常")
+                        }else if($(this).text() === '01'){
+                            $(this).text("停用")
+                        }
+                    });
+                    $("[data-field='userType']").children().each(function(){
+                        if($(this).text() === '00'){
+                            $(this).text("普通用户")
+                        }else if($(this).text() === '01'){
+                            $(this).text("VIP用户")
+                        }
+                    });
+                }
+            });
+
+            table.on('toolbar(dataGrid)', function(obj){
+                var username = $("#username").val();
+                var userType = $("#userType").val();
+                var userStatus = $("#userStatus").val();
+                var checkStatus = table.checkStatus(obj.config.id);
+                switch(obj.event){
+                    case 'view':
+                        /*var data = checkStatus.data;
+                        if (data.length === 0) {
+                            layer.msg("请选中一条记录");
+                            return;
+                        }*/
+
+                        layer.open({
+                            title: "用户信息"
+                            ,type: 2
+                            ,icon: 1
+                            ,content: '${ctx}/resume/resumeForm'
+                            ,area: ['500px', '330px']
+                            ,btn: ['关闭']
+                            ,yes: function(index, layero){
+                                layer.close(index);
+                            }
+                        });
+                        break;
+                    case 'freeze':
+                        var data = checkStatus.data;
+                        if (data.length === 0) {
+                            layer.msg("请选中一条记录");
+                            return;
+                        }
+                        layer.msg('确定停用？', {
+                            time: 0
+                            ,btn: ['确定', '取消']
+                            ,yes: function(index){
+                                layer.close(index);
+                                $.ajax({
+                                    url: '${ctx}/user/freeze',
+                                    type: 'post',
+                                    dataType: 'json',
+                                    data: {
+                                        userId: data[0].userId
+                                    },
+                                    success: function(result) {
+                                        layer.msg(result.msg);
+                                        table.reload('dataGrid', {
+                                            where: {
+                                                'username': username,
+                                                'userType': userType,
+                                                'userStatus': userStatus
+                                            }
+                                        });
+                                    }
+                                })
+                            }
+                        });
+                        break;
+                    case 'recover':
+                        var data = checkStatus.data;
+                        if (data.length === 0) {
+                            layer.msg("请选中一条记录");
+                            return;
+                        }
+                        layer.msg('确定恢复？', {
+                            time: 0
+                            ,btn: ['确定', '取消']
+                            ,yes: function(index){
+                                layer.close(index);
+                                $.ajax({
+                                    url: '${ctx}/user/recover',
+                                    type: 'post',
+                                    dataType: 'json',
+                                    data: {
+                                        userId: data[0].userId
+                                    },
+                                    success: function(result) {
+                                        layer.msg(result.msg);
+                                        table.reload('dataGrid', {
+                                            where: {
+                                                'username': username,
+                                                'userType': userType,
+                                                'userStatus': userStatus
+                                            }
+                                        });
+                                    }
+                                })
+                            }
+                        });
+                        break;
+                    case 'query':
+                        table.reload('dataGrid', {
+                            where: {
+                                'username': username,
+                                'userType': userType,
+                                'userStatus': userStatus
+                            }
+                        });
+                        break;
+                }
+            });
+
+        });
+
+        $.ajax({
+                url: '${ctx}/login/doLogin',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    username: 'admn',
+                    password: '111'
+                },
+                success: function (result) {
+                    console.log(result);
+                    layer.msg(result.msg);
+                }
+            })
+    })
+</script>
+<body>
+<#--操作按钮-->
+<script type="text/html" id="toolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="view">详细</button>
+        <button class="layui-btn layui-btn-sm" lay-event="recover">处理</button>
+        <button class="layui-btn layui-btn-sm" lay-event="query">查询</button>
+
+    </div>
+</script>
+<div class="layui-form" style="margin-top: 25px">
+    <table>
+        <tr>
+            <td>
+                <#--用户userName-->
+                <div class="layui-form-item">
+                    <label class="layui-form-label">岗位名称:</label>
+                    <div class="layui-input-block">
+                        <input id="username" name="username" type="text" placeholder="请输入岗位名称" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <#--用户类型-->
+                <div class="layui-form-item">
+                    <label class="layui-form-label">学历</label>
+                    <div class="layui-input-block">
+                        <input id="username" name="username" type="text" placeholder="请输入学历" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <#--用户状态-->
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="layui-input-block">
+                        <input id="username" name="username" type="text" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<#--查询结果-->
+<div style="padding: 15px;">
+    <table class="layui-hide" id="dataGrid" lay-filter="dataGrid"></table>
+</div>
+</body>
+</@layout>
