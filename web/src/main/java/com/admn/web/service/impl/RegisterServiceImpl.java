@@ -6,11 +6,15 @@ import com.admn.web.model.TblUser;
 import com.admn.web.service.RegisterService;
 import com.admn.web.service.SysCodeService;
 import com.admn.web.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RegisterServiceImpl implements RegisterService {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(RegisterServiceImpl.class);
 
     @Autowired
     private UserService userService;
@@ -32,6 +36,7 @@ public class RegisterServiceImpl implements RegisterService {
             if (!resultEntity.isSuccess()) {
                 return new ResultEntity(false, "注册失败");
             } else {
+                LOGGER.info("用户: " + user.getUsername() + " 注册成功");
                 return new ResultEntity(true, "注册成功");
             }
         }

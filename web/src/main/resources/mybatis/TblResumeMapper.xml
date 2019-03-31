@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.admn.web.dao.TblResumeMapper">
+    <resultMap id="BaseResultMap" type="com.admn.web.model.TblResume">
+        <result column="RESUME_ID" jdbcType="INTEGER" property="resumeId"/>
+        <result column="USER_ID" jdbcType="INTEGER" property="userId"/>
+        <result column="REAL_NAME" jdbcType="VARCHAR" property="realName"/>
+        <result column="SEX" jdbcType="VARCHAR" property="sex"/>
+        <result column="BIRTHDAY" jdbcType="VARCHAR" property="birthday"/>
+        <result column="USER_PHONE" jdbcType="VARCHAR" property="userPhone"/>
+        <result column="ADDRESS" jdbcType="VARCHAR" property="address"/>
+        <result column="MARRIAGE" jdbcType="VARCHAR" property="marriage"/>
+        <result column="AREA" jdbcType="VARCHAR" property="area"/>
+        <result column="POSITION" jdbcType="VARCHAR" property="position"/>
+        <result column="SALARY_TYPE" jdbcType="VARCHAR" property="salaryType"/>
+        <result column="TARGET_SALARY" jdbcType="DECIMAL" property="targetSalary"/>
+        <result column="WORK_TYPE" jdbcType="VARCHAR" property="workType"/>
+        <result column="ARRIVAL_TIME" jdbcType="VARCHAR" property="arrivalTime"/>
+        <result column="RESERVED1" jdbcType="VARCHAR" property="reserved1"/>
+        <result column="RESERVED2" jdbcType="VARCHAR" property="reserved2"/>
+        <result column="RESERVED3" jdbcType="VARCHAR" property="reserved3"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.admn.web.model.TblResume">
+    insert into TBL_RESUME (RESUME_ID, USER_ID, REAL_NAME, 
+      SEX, BIRTHDAY, USER_PHONE, 
+      ADDRESS, MARRIAGE, AREA, 
+      POSITION, SALARY_TYPE, TARGET_SALARY, 
+      WORK_TYPE, ARRIVAL_TIME, RESERVED1, 
+      RESERVED2, RESERVED3)
+    values (#{resumeId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{marriage,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{salaryType,jdbcType=VARCHAR}, #{targetSalary,jdbcType=DECIMAL}, 
+      #{workType,jdbcType=VARCHAR}, #{arrivalTime,jdbcType=VARCHAR}, #{reserved1,jdbcType=VARCHAR}, 
+      #{reserved2,jdbcType=VARCHAR}, #{reserved3,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.admn.web.model.TblResume">
+        insert into TBL_RESUME
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="resumeId != null">
+                RESUME_ID,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="realName != null">
+                REAL_NAME,
+            </if>
+            <if test="sex != null">
+                SEX,
+            </if>
+            <if test="birthday != null">
+                BIRTHDAY,
+            </if>
+            <if test="userPhone != null">
+                USER_PHONE,
+            </if>
+            <if test="address != null">
+                ADDRESS,
+            </if>
+            <if test="marriage != null">
+                MARRIAGE,
+            </if>
+            <if test="area != null">
+                AREA,
+            </if>
+            <if test="position != null">
+                POSITION,
+            </if>
+            <if test="salaryType != null">
+                SALARY_TYPE,
+            </if>
+            <if test="targetSalary != null">
+                TARGET_SALARY,
+            </if>
+            <if test="workType != null">
+                WORK_TYPE,
+            </if>
+            <if test="arrivalTime != null">
+                ARRIVAL_TIME,
+            </if>
+            <if test="reserved1 != null">
+                RESERVED1,
+            </if>
+            <if test="reserved2 != null">
+                RESERVED2,
+            </if>
+            <if test="reserved3 != null">
+                RESERVED3,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="resumeId != null">
+                #{resumeId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="realName != null">
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="marriage != null">
+                #{marriage,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="salaryType != null">
+                #{salaryType,jdbcType=VARCHAR},
+            </if>
+            <if test="targetSalary != null">
+                #{targetSalary,jdbcType=DECIMAL},
+            </if>
+            <if test="workType != null">
+                #{workType,jdbcType=VARCHAR},
+            </if>
+            <if test="arrivalTime != null">
+                #{arrivalTime,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved1 != null">
+                #{reserved1,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved2 != null">
+                #{reserved2,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved3 != null">
+                #{reserved3,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

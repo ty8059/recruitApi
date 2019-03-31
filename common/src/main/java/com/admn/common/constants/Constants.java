@@ -34,4 +34,15 @@ public interface Constants {
          */
         String VIP_USER = "USER_TYPE:VIP_USER";
     }
+
+    interface UserMarriage {
+        /**
+         * 未婚
+         */
+        String FALSE = "USER_MARRIAGE:FALSE";
+        /**
+         * 已婚
+         */
+        String TRUE = "USER_MARRIAGE:TRUE";
+    }
 }
