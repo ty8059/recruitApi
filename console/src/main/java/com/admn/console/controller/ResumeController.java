@@ -27,4 +27,16 @@ public class ResumeController {
         modelAndView.setViewName("/resume/resumeForm");
         return modelAndView;
     }
+
+    @GetMapping("invite")
+    public ModelAndView invite(ModelAndView modelAndView) {
+        modelAndView.setViewName("/resume/invite");
+        return modelAndView;
+    }
+
+    @GetMapping("inviteForm")
+    public ModelAndView inviteForm(ModelAndView modelAndView) {
+        modelAndView.setViewName("/resume/inviteForm");
+        return modelAndView;
+    }
 }

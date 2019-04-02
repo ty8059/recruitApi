@@ -1,4 +1,8 @@
 <#include "../_layout.html">
+<head>
+    <title>面试邀请</title>
+    <link rel="stylesheet" href="/static/css/invite.css" media="all">
+</head>
 <@layout>
 <script type="text/javascript">
     $(function () {
@@ -21,15 +25,6 @@
     <div class="layui-form" style="margin-top: 25px">
         <table>
             <tr>
-                <td>
-                    <#--岗位名称positionName-->
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">岗位名称:</label>
-                        <div class="layui-input-block">
-                            <input id="positionName" name="positionName" type="text"  autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </td>
                 <td>
                     <#--姓名-->
                     <div class="layui-form-item">
@@ -81,16 +76,15 @@
 
         </table>
         <div class="layui-form-label">工作经验：</div>
-       <#--<#list flowerList as flower>-->
+        <#--<#list flowerList as flower>-->
             <input id="workExeperience" name="workExeperience" type="text"  autocomplete="off" class="layui-input" style="margin-left: 10px">
         <#--</#list>-->
 
 
     </div>
-
-
-
-
 </form>
+<div style="margin-top: 20px">
+    <button class="layui-btn layui-btn-sm" style="width: 100px;margin-left: 30px;background-color: deepskyblue">邀请</button>
+</div>
 </body>
 </@layout>
