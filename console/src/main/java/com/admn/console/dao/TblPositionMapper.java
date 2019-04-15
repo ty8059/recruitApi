@@ -12,5 +12,8 @@ public interface TblPositionMapper extends Mapper<TblPosition> {
 
     int insertSelective(TblPosition record);
 
+    @Select("select t1.* from TBL_POSITION t1 where t1.POSITION_ID = #{positionId}")
+    TblPosition getByPositionId(@Param("positionId") Integer positionId);
+
     List<TblPosition> findByPositionName(@Param("positionName") String positionName);
 }

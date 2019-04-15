@@ -9,4 +9,6 @@ public interface PositionService {
     Layui getByPositionName(String positionName, Page page);
 
     ResultEntity addPosition(TblPosition position);
+
+    ResultEntity editPosition(TblPosition position);
 }

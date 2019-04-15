@@ -29,6 +29,18 @@ public class PositionController {
         return positionService.addPosition(position);
     }
 
+    @RequestMapping("editPosition")
+    public ResultEntity editPosition(@Valid TblPosition position, BindingResult bindingResult) {
+        if (position.getPositionId() == null) {
+            return new ResultEntity(false ,"positionId不能为空");
+        }
+        ResultEntity validResult = ResultUtil.validModel(bindingResult);
+        if (!validResult.isSuccess()) {
+            return new ResultEntity(false, validResult.getMsg());
+        }
+        return positionService.editPosition(position);
+    }
+
     @RequestMapping("dataGrid")
     public Layui dataGrid(@Valid Page page, BindingResult bindingResult, String positionName) {
         ResultEntity validResult = ResultUtil.validModel(bindingResult);
