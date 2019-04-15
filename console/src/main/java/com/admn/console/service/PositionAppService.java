@@ -1,9 +1,8 @@
 package com.admn.console.service;
 
-import com.admn.console.model.TblPositionApp;
-
-import java.util.List;
+import com.admn.common.Layui;
+import com.admn.common.Page;
 
 public interface PositionAppService {
-    List<TblPositionApp> getAppByAppTimeAndStatus(String startTime, String endTime, String status);
+    Layui getAppByAppTimeAndStatus(String startTime, String endTime, String status, Page page);
 }
