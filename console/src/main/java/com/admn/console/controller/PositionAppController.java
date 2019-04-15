@@ -24,7 +24,7 @@ public class PositionAppController {
                           String startTime, String endTime, String status) {
         ResultEntity validResult = ResultUtil.validModel(bindingResult);
         if (!validResult.isSuccess()) {
-            return Layui.data(0, null, validResult.getMsg());
+            return Layui.error(validResult.getMsg());
         }
         return positionAppService.getAppByAppTimeAndStatus(startTime, endTime, status, page);
     }

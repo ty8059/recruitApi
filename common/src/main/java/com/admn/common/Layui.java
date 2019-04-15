@@ -30,6 +30,12 @@ public class Layui extends HashMap<String, Object> {
         return layui;
     }
 
+    public static Layui error(String msg) {
+        Layui layui = new Layui();
+        layui.put("msg", msg);
+        return layui;
+    }
+
     public int getCode() {
         return code;
     }

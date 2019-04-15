@@ -28,7 +28,7 @@ public class PositionController {
     public Layui dataGrid(@Valid Page page, BindingResult bindingResult, String positionName) {
         ResultEntity validResult = ResultUtil.validModel(bindingResult);
         if (!validResult.isSuccess()) {
-            return Layui.data(0, null, validResult.getMsg());
+            return Layui.error(validResult.getMsg());
         }
         return positionService.getByPositionName(positionName,page);
     }
