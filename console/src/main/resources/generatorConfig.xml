@@ -27,7 +27,7 @@
         <javaClientGenerator targetPackage="com.admn.console.dao"
                              targetProject="C:\Users\wangyi\IdeaProjects\recruitApi\console\src\main\java" type="XMLMAPPER" />
         <!--数据表-->
-        <table tableName="TBL_POSITION_APP"
+        <table tableName="TBL_POSITION"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false" />
 
