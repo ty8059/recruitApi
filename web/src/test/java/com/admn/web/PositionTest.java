@@ -19,8 +19,7 @@ public class PositionTest {
 
     @Test
     public void getListTest() {
-        List<TblPosition> list = positionService.getPositionList();
-        System.out.println(list.size());
+
     }
 
 }
