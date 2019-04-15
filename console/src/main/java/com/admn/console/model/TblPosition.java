@@ -1,6 +1,8 @@
 package com.admn.console.model;
 
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -8,20 +10,28 @@ import java.math.BigDecimal;
 public class TblPosition implements Serializable {
     private Integer positionId;
 
+    @NotBlank(message = "职位名不能为空")
     private String positionName;
 
+    @NotBlank(message = "工作类型不能为空")
     private String workType;
 
+    @NotNull(message = "薪资不能为空")
     private BigDecimal salary;
 
+    @NotBlank(message = "薪资类型不能为空")
     private String salaryType;
 
+    @NotBlank(message = "教育要求不能为空")
     private String eduRequirement;
 
+    @NotBlank(message = "工作要求不能为空")
     private String workRequirement;
 
+    @NotBlank(message = "工作地区不能为空")
     private String workArea;
 
+    @NotBlank(message = "工作描述不能为空")
     private String workDescription;
 
     private static final long serialVersionUID = 1L;

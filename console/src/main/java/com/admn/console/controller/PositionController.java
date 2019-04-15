@@ -4,6 +4,7 @@ import com.admn.common.Layui;
 import com.admn.common.Page;
 import com.admn.common.ResultEntity;
 import com.admn.common.ResultUtil;
+import com.admn.console.model.TblPosition;
 import com.admn.console.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -20,8 +21,12 @@ public class PositionController {
     private PositionService positionService;
 
     @RequestMapping("addPosition")
-    public ResultEntity addPosition() {
-        return null;
+    public ResultEntity addPosition(@Valid TblPosition position, BindingResult bindingResult) {
+        ResultEntity validResult = ResultUtil.validModel(bindingResult);
+        if (!validResult.isSuccess()) {
+            return new ResultEntity(false, validResult.getMsg());
+        }
+        return positionService.addPosition(position);
     }
 
     @RequestMapping("dataGrid")

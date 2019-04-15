@@ -2,6 +2,7 @@ package com.admn.console.service.impl;
 
 import com.admn.common.Layui;
 import com.admn.common.Page;
+import com.admn.common.ResultEntity;
 import com.admn.console.dao.TblPositionMapper;
 import com.admn.console.model.TblPosition;
 import com.admn.console.service.PositionService;
@@ -24,5 +25,15 @@ public class PositionServiceImpl implements PositionService {
         List<TblPosition> list = positionMapper.findByPositionName(positionName);
         PageInfo<TblPosition> pageInfo = new PageInfo<>(list);
         return Layui.data((int)pageInfo.getTotal(), list, "positionList");
+    }
+
+    @Override
+    public ResultEntity addPosition(TblPosition position) {
+        int result = positionMapper.insertSelective(position);
+        if (result > 0) {
+            return new ResultEntity(true, "添加职位成功");
+        } else {
+            return new ResultEntity(false, "添加职位失败");
+        }
     }
 }
