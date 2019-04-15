@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.admn.console.dao.TblPositionAppMapper">
+    <resultMap id="BaseResultMap" type="com.admn.console.model.TblPositionApp">
+        <result column="USER_ID" jdbcType="INTEGER" property="userId"/>
+        <result column="POSITION_ID" jdbcType="INTEGER" property="positionId"/>
+        <result column="RESUME_ID" jdbcType="INTEGER" property="resumeId"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="APP_TIME" jdbcType="VARCHAR" property="appTime"/>
+        <result column="PROCESS_TIME" jdbcType="VARCHAR" property="processTime"/>
+        <result column="RESERVED1" jdbcType="VARCHAR" property="reserved1"/>
+        <result column="RESERVED2" jdbcType="VARCHAR" property="reserved2"/>
+        <result column="RESERVED3" jdbcType="VARCHAR" property="reserved3"/>
+    </resultMap>
+
+    <resultMap id="UnionResultMap" type="com.admn.console.model.TblPositionApp">
+        <result column="REAL_NAME" jdbcType="VARCHAR" property="realName"/>
+        <result column="POSITION_NAME" jdbcType="VARCHAR" property="positionName"/>
+    </resultMap>
+
+    <sql id="Union_Column_List">
+        t1.*, t2.REAL_NAME, t3.POSITION_NAME
+    </sql>
+
+    <insert id="insert" parameterType="com.admn.console.model.TblPositionApp">
+    insert into TBL_POSITION_APP (USER_ID, POSITION_ID, RESUME_ID, 
+      STATUS, APP_TIME, PROCESS_TIME, 
+      RESERVED1, RESERVED2, RESERVED3
+      )
+    values (#{userId,jdbcType=INTEGER}, #{positionId,jdbcType=INTEGER}, #{resumeId,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR}, #{appTime,jdbcType=VARCHAR}, #{processTime,jdbcType=VARCHAR}, 
+      #{reserved1,jdbcType=VARCHAR}, #{reserved2,jdbcType=VARCHAR}, #{reserved3,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.admn.console.model.TblPositionApp">
+        insert into TBL_POSITION_APP
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="positionId != null">
+                POSITION_ID,
+            </if>
+            <if test="resumeId != null">
+                RESUME_ID,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="appTime != null">
+                APP_TIME,
+            </if>
+            <if test="processTime != null">
+                PROCESS_TIME,
+            </if>
+            <if test="reserved1 != null">
+                RESERVED1,
+            </if>
+            <if test="reserved2 != null">
+                RESERVED2,
+            </if>
+            <if test="reserved3 != null">
+                RESERVED3,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="positionId != null">
+                #{positionId,jdbcType=INTEGER},
+            </if>
+            <if test="resumeId != null">
+                #{resumeId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="appTime != null">
+                #{appTime,jdbcType=VARCHAR},
+            </if>
+            <if test="processTime != null">
+                #{processTime,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved1 != null">
+                #{reserved1,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved2 != null">
+                #{reserved2,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved3 != null">
+                #{reserved3,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="findAppByAppTimeAndStatus" resultType="com.admn.console.model.TblPositionApp" resultMap="UnionResultMap">
+        select
+        <include refid="Union_Column_List"/>
+        from TBL_POSITION_APP t1
+        left join TBL_RESUME t2
+        on t1.RESUME_ID = t2.RESUME_ID
+        left join TBL_POSITION t3
+        on t1.POSITION_ID = t3.POSITION_ID
+        where 1 = 1
+        <if test="startTime != null and startTime != ''">
+            and t1.APP_TIME &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and t1.APP_TIME &lt;= #{endTime}
+        </if>
+        <if test="status != null and status != ''">
+            and t1.STATUS &lt;= #{status}
+        </if>
+    </select>
+</mapper>
