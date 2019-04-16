@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface PositionService {
     List<TblPosition> getPositionList();
+
+    TblPosition getPositionById(Integer positionId);
 }

@@ -18,4 +18,9 @@ public class PositionServiceImpl implements PositionService {
     public List<TblPosition> getPositionList() {
         return positionMapper.selectAll();
     }
+
+    @Override
+    public TblPosition getPositionById(Integer positionId) {
+        return positionMapper.findPositionById(positionId);
+    }
 }
