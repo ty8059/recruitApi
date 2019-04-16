@@ -44,7 +44,7 @@
         <div class="layui-side layui-side-menu">
             <div class="layui-side-scroll">
                 <div class="layui-logo" lay-href="home/console">
-                    <span>小金山花卉管理控制台</span>
+                    <span>移动招聘系统</span>
                 </div>
 
                 <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
@@ -56,7 +56,7 @@
                         </a>
                         <dl class="layui-nav-child">
                             <dd data-name="console" class="layui-this">
-                                <a lay-href="home/console">控制台</a>
+                                <a lay-href="/position">职位管理</a>
                             </dd>
                         </dl>
                     </li>
@@ -70,15 +70,15 @@
                         </dl>
                     </li>
                     <li data-name="goodMngr" class="layui-nav-item">
-                        <a href="javascript:;" lay-tips="商品管理" lay-direction="2">
+                        <a href="javascript:;" lay-tips="职位管理" lay-direction="2">
                             <i class="layui-icon layui-icon-app"></i>
-                            <cite>商品管理</cite>
+                            <cite>职位管理</cite>
                         </a>
                         <dl class="layui-nav-child">
-                            <dd><a lay-href="/resume/invite">面试邀请</a></dd>
-                            <dd><a lay-href="flowerType">花类管理</a></dd>
-                            <dd><a lay-href="flowerCode">种类管理</a></dd>
-                            <dd><a lay-href="gatewayOrder">订单管理</a></dd>
+                            <dd><a lay-href="/position">职位管理</a></dd>
+                            <dd><a lay-href="/positionApp">申请审核</a></dd>
+                            <dd><a lay-href="/resume">面试邀请</a></dd>
+
                         </dl>
                     </li>
                     <li data-name="user" class="layui-nav-item">
@@ -133,7 +133,7 @@
             </div>
             <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
                 <ul class="layui-tab-title" id="LAY_app_tabsheader">
-                    <li lay-id="home/console" lay-attr="home/console" class="layui-this"><i
+                    <li lay-id="position" lay-attr="position" class="layui-this"><i
                                 class="layui-icon layui-icon-home"></i></li>
                 </ul>
             </div>
@@ -142,7 +142,7 @@
         <!-- 主体内容 -->
         <div class="layui-body" id="LAY_app_body">
             <div class="layadmin-tabsbody-item layui-show">
-                <iframe src="home/console" frameborder="0" class="layadmin-iframe"></iframe>
+                <iframe src="position" frameborder="0" class="layadmin-iframe"></iframe>
             </div>
         </div>
 

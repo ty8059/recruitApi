@@ -1,9 +1,17 @@
 package com.admn.console.controller;
 
+import com.admn.common.Layui;
+import com.admn.common.Page;
+import com.admn.common.ResultEntity;
+import com.admn.common.ResultUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 /**
  * @Author wangyi
@@ -15,28 +23,26 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("resume")
 public class ResumeController {
 
+
+
     @GetMapping("")
     public ModelAndView index(ModelAndView modelAndView) {
         modelAndView.setViewName("/resume/resume");
         return modelAndView;
     }
 
-    @GetMapping("resumeForm")
-    public ModelAndView resumeForm(ModelAndView modelAndView) {
-        modelAndView.addObject("wuzhaoyu", "sb");
-        modelAndView.setViewName("/resume/resumeForm");
-        return modelAndView;
+    @RequestMapping("dataGrid")
+    public Layui dataGrid(@Valid Page page, BindingResult bindingResult, String targetPosition) {
+        ResultEntity validResult = ResultUtil.validModel(bindingResult);
+        if (!validResult.isSuccess()) {
+            return Layui.error(validResult.getMsg());
+        }
+        return null;
     }
 
     @GetMapping("invite")
-    public ModelAndView invite(ModelAndView modelAndView) {
-        modelAndView.setViewName("/resume/invite");
-        return modelAndView;
+    public ResultEntity invite(ModelAndView modelAndView) {
+        return null;
     }
 
-    @GetMapping("inviteForm")
-    public ModelAndView inviteForm(ModelAndView modelAndView) {
-        modelAndView.setViewName("/resume/inviteForm");
-        return modelAndView;
-    }
 }

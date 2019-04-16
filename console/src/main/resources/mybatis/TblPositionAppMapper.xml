@@ -110,7 +110,7 @@
             and t1.APP_TIME &lt;= #{endTime}
         </if>
         <if test="status != null and status != ''">
-            and t1.STATUS &lt;= #{status}
+            and t1.STATUS = #{status}
         </if>
     </select>
 </mapper>

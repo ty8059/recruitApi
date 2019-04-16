@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -19,6 +20,12 @@ public class PositionAppController {
 
     @Autowired
     private PositionAppService positionAppService;
+
+    @RequestMapping("")
+    public ModelAndView index(ModelAndView modelAndView) {
+        modelAndView.setViewName("positionApp/positionApp");
+        return modelAndView;
+    }
 
     @RequestMapping("dataGrid")
     public Layui dataGrid(@Valid Page page, BindingResult bindingResult,
