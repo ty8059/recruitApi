@@ -31,20 +31,20 @@
                     </div>
                 </td>
                 <td>
-                    <#--用户类型-->
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">学历</label>
-                        <div class="layui-input-block">
-                            <input id="deGre" name="deGre" type="text"  autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <#--用户姓名-->
+                    <#--姓名-->
                     <div class="layui-form-item">
                         <label class="layui-form-label">姓名</label>
                         <div class="layui-input-block">
                             <input id="userName" name="userName" type="text"  autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <#--学历-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">学历</label>
+                        <div class="layui-input-block">
+                            <input id="deGre" name="deGre" type="text"  autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </td>
@@ -53,33 +53,39 @@
                 <td>
                     <#--岗位名称positionName-->
                     <div class="layui-form-item">
-                        <label class="layui-form-label">岗位名称:</label>
+                        <label class="layui-form-label">性别:</label>
                         <div class="layui-input-block">
-                            <input id="positionName" name="positionName" type="text"  autocomplete="off" class="layui-input">
+                            <input id="sex" name="sex" type="text"  autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </td>
                 <td>
                     <#--用户类型-->
                     <div class="layui-form-item">
-                        <label class="layui-form-label">学历</label>
+                        <label class="layui-form-label">手机号码</label>
                         <div class="layui-input-block">
-                            <input id="deGre" name="deGre" type="text"  autocomplete="off" class="layui-input">
+                            <input id="telNumber" name="telNumber" type="text"  autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </td>
                 <td>
-                    <#--用户姓名-->
+                    <#--居住地-->
                     <div class="layui-form-item">
-                        <label class="layui-form-label">姓名</label>
+                        <label class="layui-form-label">居住地</label>
                         <div class="layui-input-block">
-                            <input id="userName" name="userName" type="text"  autocomplete="off" class="layui-input">
+                            <input id="address" name="address" type="text"  autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </td>
             </tr>
 
         </table>
+        <div class="layui-form-label">工作经验：</div>
+       <#--<#list flowerList as flower>-->
+            <input id="workExeperience" name="workExeperience" type="text"  autocomplete="off" class="layui-input" style="margin-left: 10px">
+        <#--</#list>-->
+
+
     </div>
 
 

@@ -18,16 +18,16 @@
                         userId="root" password="111111" />
         <!--entity实体类-->
         <javaModelGenerator targetPackage="com.admn.console.model"
-                            targetProject="C:\Users\admn\IdeaProjects\recruit\console\src\main\java" />
+                            targetProject="C:\Users\wangyi\IdeaProjects\recruitApi\console\src\main\java" />
 
         <!-- mybatis映射xml文件 -->
         <sqlMapGenerator targetPackage="mybatis"
-                         targetProject="C:\Users\admn\IdeaProjects\recruit\console\src\main\resources" />
+                         targetProject="C:\Users\wangyi\IdeaProjects\recruitApi\console\src\main\resources" />
         <!--mapper接口 -->
         <javaClientGenerator targetPackage="com.admn.console.dao"
-                             targetProject="C:\Users\admn\IdeaProjects\recruit\console\src\main\java" type="XMLMAPPER" />
+                             targetProject="C:\Users\wangyi\IdeaProjects\recruitApi\console\src\main\java" type="XMLMAPPER" />
         <!--数据表-->
-        <table tableName="TBL_SYS_CODE"
+        <table tableName="TBL_POSITION"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false" />
 

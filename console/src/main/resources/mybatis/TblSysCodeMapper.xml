@@ -83,4 +83,13 @@
             </if>
         </trim>
     </insert>
+
+    <select id="findLikeTypeCode" resultMap="BaseResultMap" resultType="com.admn.console.model.TblSysCode">
+        select t1.*
+        from TBL_SYS_CODE t1
+        where 1 = 1
+        <if test="typeCode != null and typeCode != ''">
+            and t1.TYPE_CODE like CONCAT('%', #{typeCode}, '%')
+        </if>
+    </select>
 </mapper>

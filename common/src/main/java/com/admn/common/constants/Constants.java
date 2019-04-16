@@ -45,4 +45,20 @@ public interface Constants {
          */
         String TRUE = "USER_MARRIAGE:TRUE";
     }
+
+    interface PositionAppStatus {
+        /**
+         * 未通过
+         */
+        String FAIL = "POSITION_APP_STATUS:FAIL";
+        /**
+         * 通过
+         */
+        String PASS = "POSITION_APP_STATUS:PASS";
+        /**
+         * 待审核
+         */
+        String PENDING = "POSITION_APP_STATUS:PENDING";
+    }
+
 }

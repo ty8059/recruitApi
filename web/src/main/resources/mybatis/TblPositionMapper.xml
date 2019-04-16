@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.admn.web.dao.TblPositionMapper">
+  <resultMap id="BaseResultMap" type="com.admn.web.model.TblPosition">
+    <result column="POSITION_ID" jdbcType="INTEGER" property="positionId" />
+    <result column="POSITION_NAME" jdbcType="VARCHAR" property="positionName" />
+    <result column="WORK_TYPE" jdbcType="VARCHAR" property="workType" />
+    <result column="SALARY" jdbcType="DECIMAL" property="salary" />
+    <result column="SALARY_TYPE" jdbcType="VARCHAR" property="salaryType" />
+    <result column="EDU_REQUIREMENT" jdbcType="VARCHAR" property="eduRequirement" />
+    <result column="WORK_REQUIREMENT" jdbcType="VARCHAR" property="workRequirement" />
+    <result column="WORK_AREA" jdbcType="VARCHAR" property="workArea" />
+    <result column="WORK_DESCRIPTION" jdbcType="VARCHAR" property="workDescription" />
+  </resultMap>
+  <insert id="insert" parameterType="com.admn.web.model.TblPosition">
+    insert into TBL_POSITION (POSITION_ID, POSITION_NAME, WORK_TYPE, 
+      SALARY, SALARY_TYPE, EDU_REQUIREMENT, 
+      WORK_REQUIREMENT, WORK_AREA, WORK_DESCRIPTION
+      )
+    values (#{positionId,jdbcType=INTEGER}, #{positionName,jdbcType=VARCHAR}, #{workType,jdbcType=VARCHAR}, 
+      #{salary,jdbcType=DECIMAL}, #{salaryType,jdbcType=VARCHAR}, #{eduRequirement,jdbcType=VARCHAR}, 
+      #{workRequirement,jdbcType=VARCHAR}, #{workArea,jdbcType=VARCHAR}, #{workDescription,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.admn.web.model.TblPosition">
+    insert into TBL_POSITION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="positionId != null">
+        POSITION_ID,
+      </if>
+      <if test="positionName != null">
+        POSITION_NAME,
+      </if>
+      <if test="workType != null">
+        WORK_TYPE,
+      </if>
+      <if test="salary != null">
+        SALARY,
+      </if>
+      <if test="salaryType != null">
+        SALARY_TYPE,
+      </if>
+      <if test="eduRequirement != null">
+        EDU_REQUIREMENT,
+      </if>
+      <if test="workRequirement != null">
+        WORK_REQUIREMENT,
+      </if>
+      <if test="workArea != null">
+        WORK_AREA,
+      </if>
+      <if test="workDescription != null">
+        WORK_DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="positionId != null">
+        #{positionId,jdbcType=INTEGER},
+      </if>
+      <if test="positionName != null">
+        #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="workType != null">
+        #{workType,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null">
+        #{salary,jdbcType=DECIMAL},
+      </if>
+      <if test="salaryType != null">
+        #{salaryType,jdbcType=VARCHAR},
+      </if>
+      <if test="eduRequirement != null">
+        #{eduRequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="workRequirement != null">
+        #{workRequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="workArea != null">
+        #{workArea,jdbcType=VARCHAR},
+      </if>
+      <if test="workDescription != null">
+        #{workDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
