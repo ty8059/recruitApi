@@ -2,6 +2,7 @@ package com.admn.console.service.impl;
 
 import com.admn.common.Layui;
 import com.admn.common.Page;
+import com.admn.common.ResultEntity;
 import com.admn.console.dao.TblPositionAppMapper;
 import com.admn.console.model.TblPositionApp;
 import com.admn.console.service.PositionAppService;
@@ -24,5 +25,10 @@ public class PositionAppServiceImpl implements PositionAppService {
         List<TblPositionApp> list = positionAppMapper.findAppByAppTimeAndStatus(startTime, endTime, status);
         PageInfo<TblPositionApp> pageInfo = new PageInfo<>(list);
         return Layui.data((int)pageInfo.getTotal(), list, "positionAppList");
+    }
+
+    @Override
+    public ResultEntity processApp(Integer userId, Integer positionId, Integer resumeId, String status) {
+        return null;
     }
 }
