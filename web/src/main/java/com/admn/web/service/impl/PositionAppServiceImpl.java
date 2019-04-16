@@ -71,4 +71,9 @@ public class PositionAppServiceImpl implements PositionAppService {
          return new ResultEntity(false, "申请简历失败");
       }
    }
+
+   @Override
+   public List<TblPositionApp> getAppByUserId(Integer userId) {
+      return positionAppMapper.findAppByUserId(userId);
+   }
 }

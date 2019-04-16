@@ -3,9 +3,19 @@ package com.admn.web.model;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Table(name = "TBL_POSITION_APP")
 public class TblPositionApp implements Serializable {
+
+    @Transient
+    private BigDecimal salary;
+
+    @Transient
+    private String workType;
+
+    @Transient
+    private String salaryType;
 
     @Transient
     private String positionName;
@@ -119,5 +129,29 @@ public class TblPositionApp implements Serializable {
 
     public void setPositionName(String positionName) {
         this.positionName = positionName;
+    }
+
+    public BigDecimal getSalary() {
+        return salary;
+    }
+
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
+    }
+
+    public String getWorkType() {
+        return workType;
+    }
+
+    public void setWorkType(String workType) {
+        this.workType = workType;
+    }
+
+    public String getSalaryType() {
+        return salaryType;
+    }
+
+    public void setSalaryType(String salaryType) {
+        this.salaryType = salaryType;
     }
 }

@@ -20,4 +20,6 @@ public interface TblPositionAppMapper extends Mapper<TblPositionApp> {
             "t1.RESUME_ID = #{resumeId}")
     TblPositionApp findAppByPositionIdAndUserIdAndResumeId(@Param("positionId") Integer positionId,
                                                 @Param("userId") Integer userId, @Param("resumeId") Integer resumeId);
+
+    List<TblPositionApp> findAppByUserId(@Param("userId") Integer userId);
 }

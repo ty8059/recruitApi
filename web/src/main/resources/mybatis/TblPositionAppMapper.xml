@@ -16,10 +16,13 @@
     <resultMap id="UnionResultMap" type="com.admn.web.model.TblPositionApp">
         <result column="REAL_NAME" jdbcType="VARCHAR" property="realName"/>
         <result column="POSITION_NAME" jdbcType="VARCHAR" property="positionName"/>
+        <result column="WORK_TYPE" jdbcType="VARCHAR" property="workType"/>
+        <result column="SALARY_TYPE" jdbcType="VARCHAR" property="salaryType"/>
+        <result column="SALARY" jdbcType="DECIMAL" property="salary"/>
     </resultMap>
 
     <sql id="Union_Column_List">
-        t1.*, t2.REAL_NAME, t3.POSITION_NAME
+        t1.*, t2.REAL_NAME, t3.POSITION_NAME, t3.SALARY, t3.SALARY_TYPE, t3.WORK_TYPE
     </sql>
 
     <insert id="insert" parameterType="com.admn.web.model.TblPositionApp">
@@ -111,6 +114,20 @@
         </if>
         <if test="status != null and status != ''">
             and t1.STATUS &lt;= #{status}
+        </if>
+    </select>
+
+    <select id="findAppByUserId" resultType="com.admn.web.model.TblPositionApp" resultMap="UnionResultMap">
+        select
+        <include refid="Union_Column_List"/>
+        from TBL_POSITION_APP t1
+        left join TBL_RESUME t2
+        on t1.RESUME_ID = t2.RESUME_ID
+        left join TBL_POSITION t3
+        on t1.POSITION_ID = t3.POSITION_ID
+        where 1 = 1
+        <if test="userId != null and userId != ''">
+            and t1.USER_ID = #{userId}
         </if>
     </select>
 </mapper>
