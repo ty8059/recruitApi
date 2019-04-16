@@ -33,6 +33,12 @@ public class ResumeController {
         return modelAndView;
     }
 
+    @GetMapping("resumeDetail")
+    public ModelAndView resumeDetail(ModelAndView modelAndView) {
+        modelAndView.setViewName("/resume/resumeDetail");
+        return modelAndView;
+    }
+
     @RequestMapping("dataGrid")
     public Layui dataGrid(@Valid Page page, BindingResult bindingResult, String position) {
         ResultEntity validResult = ResultUtil.validModel(bindingResult);

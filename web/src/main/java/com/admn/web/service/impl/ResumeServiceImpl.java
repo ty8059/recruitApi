@@ -1,7 +1,9 @@
 package com.admn.web.service.impl;
 
 import com.admn.common.ResultEntity;
+import com.admn.web.dao.TblEduExpMapper;
 import com.admn.web.dao.TblResumeMapper;
+import com.admn.web.model.TblEduExp;
 import com.admn.web.model.TblResume;
 import com.admn.web.service.ResumeService;
 import org.slf4j.Logger;
@@ -19,6 +21,8 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Autowired
     private TblResumeMapper resumeMapper;
+    @Autowired
+    private TblEduExpMapper eduExpMapper;
 
     @Override
     public List<TblResume> findResumeByUserId(Integer userId) {
@@ -26,7 +30,17 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
-    public ResultEntity editResume(TblResume resume) {
+    public TblEduExp findEduExp(Integer userId) {
+        List<TblEduExp> list = eduExpMapper.findByUserId(userId);
+        if (list.size() == 0) {
+            return null;
+        } else {
+            return list.get(0);
+        }
+    }
+
+    @Override
+    public ResultEntity editBasicInfo(TblResume resume) {
         try {
             if (resumeMapper.findByUserId(resume.getUserId()).size() == 0) {
                 resumeMapper.insertSelective(resume);
@@ -35,6 +49,24 @@ public class ResumeServiceImpl implements ResumeService {
                 Example.Criteria criteria = example.createCriteria();
                 criteria.andEqualTo("userId", resume.getUserId());
                 resumeMapper.updateByExampleSelective(resume, example);
+            }
+        } catch (Exception e) {
+            LOGGER.error(">>ResumeServiceImpl, 更新简历失败", e);
+            return new ResultEntity(false, "修改失败");
+        }
+        return new ResultEntity(true, "修改成功");
+    }
+
+    @Override
+    public ResultEntity editEduExp(TblEduExp eduExp) {
+        try {
+            if (eduExpMapper.findByUserId(eduExp.getUserId()).size() == 0) {
+                eduExpMapper.insertSelective(eduExp);
+            } else {
+                Example example = new Example(TblEduExp.class);
+                Example.Criteria criteria = example.createCriteria();
+                criteria.andEqualTo("userId", eduExp.getUserId());
+                eduExpMapper.updateByExampleSelective(eduExp, example);
             }
         } catch (Exception e) {
             LOGGER.error(">>ResumeServiceImpl, 更新简历失败", e);

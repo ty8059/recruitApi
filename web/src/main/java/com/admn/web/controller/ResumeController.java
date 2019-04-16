@@ -1,15 +1,21 @@
 package com.admn.web.controller;
 
 import com.admn.common.ResultEntity;
+import com.admn.common.ResultUtil;
+import com.admn.web.model.TblEduExp;
 import com.admn.web.model.TblResume;
 import com.admn.web.service.ResumeService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 /**
  * @Author wangyi
@@ -39,30 +45,57 @@ public class ResumeController {
         return new ResultEntity(true, "获取resume成功", resumeService.findResumeByUserId(userId));
     }
 
-    @PostMapping("editResume")
+    @PostMapping("getEduExpByUserId")
     @ResponseBody
-    public ResultEntity editResume(TblResume resume) {
+    public ResultEntity getEduExpByUserId(Integer userId) {
+        if (userId == null || userId <= 0) {
+            return new ResultEntity(false, "userId非法");
+        }
+        TblEduExp eduExp = resumeService.findEduExp(userId);
+        if (eduExp != null) {
+            return new ResultEntity(true, "获取resume成功", eduExp);
+        } else {
+            return new ResultEntity(true, "该用户无教育经验");
+        }
+    }
+
+    @PostMapping("editBasicInfo")
+    @ResponseBody
+    public ResultEntity editBasicInfo(TblResume resume) {
         if (resume.getUserId() == null || resume.getUserId() <= 0) {
             return new ResultEntity(false, "userId为空或非法");
         }
-        if (resume.getRealName() == null || "".equals(resume.getRealName())) {
+        if (StringUtils.isBlank(resume.getRealName())) {
             return new ResultEntity(false, "姓名不能为空");
         }
-        if (resume.getSex() == null || "".equals(resume.getSex())) {
+        if (StringUtils.isBlank(resume.getSex())) {
             return new ResultEntity(false, "性别不能为空");
         }
-        if (resume.getBirthday() == null || "".equals(resume.getBirthday())) {
+        if (StringUtils.isBlank(resume.getBirthday())) {
             return new ResultEntity(false, "出生日期不能为空");
         }
-        if (resume.getUserPhone() == null || "".equals(resume.getUserPhone())) {
+        if (StringUtils.isBlank(resume.getUserPhone())) {
             return new ResultEntity(false, "手机号不能为空");
         }
-        if (resume.getAddress() == null || "".equals(resume.getAddress())) {
+        if (StringUtils.isBlank(resume.getAddress())) {
             return new ResultEntity(false, "地址不能为空");
         }
-        if (resume.getMarriage() == null || "".equals(resume.getMarriage())) {
+        if (StringUtils.isBlank(resume.getMarriage())) {
             return new ResultEntity(false, "婚姻情况不能为空");
         }
-        return resumeService.editResume(resume);
+        return resumeService.editBasicInfo(resume);
+    }
+
+    @PostMapping("editEduExp")
+    @ResponseBody
+    public ResultEntity editEduExp(@Valid TblEduExp eduExp, BindingResult bindingResult) {
+        if (eduExp.getUserId() == null || eduExp.getUserId() <= 0) {
+            return new ResultEntity(false, "userId为空或非法");
+        }
+        ResultEntity validResult = ResultUtil.validModel(bindingResult);
+        if (!validResult.isSuccess()) {
+            return validResult;
+        }
+        return resumeService.editEduExp(eduExp);
     }
 }

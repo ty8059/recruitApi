@@ -1,7 +1,7 @@
 <#include "../_layout.html">
 <@layout>
 <head>
-    <title>用户</title>
+    <title>面试邀请</title>
 </head>
 <script type="text/javascript">
     $(function () {
@@ -118,7 +118,7 @@
                             title: "用户信息"
                             ,type: 2
                             ,icon: 1
-                            ,content: '${ctx}/resume/dataGrid'
+                            ,content: '${ctx}/resume/resumeDetail'
                             ,area: ['800px', '500px']
                             ,btn: ['关闭']
                             ,yes: function(index, layero){
@@ -144,10 +144,9 @@
 <#--操作按钮-->
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="view">详细</button>
+        <button class="layui-btn layui-btn-sm" lay-event="view">简历</button>
         <button class="layui-btn layui-btn-sm" lay-event="recover">处理</button>
         <button class="layui-btn layui-btn-sm" lay-event="query">查询</button>
-
     </div>
 </script>
 <div class="layui-form" style="margin-top: 25px">
