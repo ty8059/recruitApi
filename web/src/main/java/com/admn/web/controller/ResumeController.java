@@ -104,6 +104,27 @@ public class ResumeController {
         return resumeService.editBasicInfo(resume);
     }
 
+    @PostMapping("editTarget")
+    @ResponseBody
+    public ResultEntity editTarget(TblResume resume) {
+        if (resume.getUserId() == null || resume.getUserId() <= 0) {
+            return new ResultEntity(false, "userId为空或非法");
+        }
+        if (StringUtils.isBlank(resume.getArea())) {
+            return new ResultEntity(false, "地点不能为空");
+        }
+        if (StringUtils.isBlank(resume.getPosition())) {
+            return new ResultEntity(false, "职位不能为空");
+        }
+        if (resume.getTargetSalary() == null) {
+            return new ResultEntity(false, "薪资不能为空");
+        }
+        if (StringUtils.isBlank(resume.getArrivalTime())) {
+            return new ResultEntity(false, "到岗时间不能为空");
+        }
+        return resumeService.editBasicInfo(resume);
+    }
+
     @PostMapping("editEduExp")
     @ResponseBody
     public ResultEntity editEduExp(@Valid TblEduExp eduExp, BindingResult bindingResult) {
