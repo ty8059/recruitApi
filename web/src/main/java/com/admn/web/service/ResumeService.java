@@ -14,6 +14,8 @@ public interface ResumeService {
 
     TblWorkExp findWorkExp(Integer userId);
 
+    ResultEntity getInviteMsg(Integer userId);
+
     ResultEntity editBasicInfo(TblResume resume);
 
     ResultEntity editEduExp(TblEduExp eduExp);

@@ -46,6 +46,15 @@ public class ResumeController {
         return new ResultEntity(true, "获取resume成功", resumeService.findResumeByUserId(userId));
     }
 
+    @PostMapping("getInviteMsg")
+    @ResponseBody
+    public ResultEntity getInviteMsg(Integer userId) {
+        if (userId == null || userId <= 0) {
+            return new ResultEntity(false, "userId非法");
+        }
+        return resumeService.getInviteMsg(userId);
+    }
+
     @PostMapping("getEduExpByUserId")
     @ResponseBody
     public ResultEntity getEduExpByUserId(Integer userId) {

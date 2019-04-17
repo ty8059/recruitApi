@@ -48,6 +48,19 @@ public class ResumeServiceImpl implements ResumeService {
         return workExpMapper.findByUserId(userId);
     }
 
+
+    @Override
+    public ResultEntity getInviteMsg(Integer userId) {
+        List<TblResume> list = resumeMapper.findByUserId(userId);
+        if (list.size() != 0) {
+            TblResume resume = list.get(0);
+            if ("00".equals(resume.getReserved2())) {
+                return new ResultEntity(true, "HR主动邀请你参加面试，请联系HR");
+            }
+        }
+        return new ResultEntity(false, "无面试邀请");
+    }
+
     @Override
     public ResultEntity editBasicInfo(TblResume resume) {
         try {
