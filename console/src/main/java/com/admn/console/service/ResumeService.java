@@ -2,6 +2,7 @@ package com.admn.console.service;
 
 import com.admn.common.Layui;
 import com.admn.common.Page;
+import com.admn.common.ResultEntity;
 
 /**
  * @Author wangyi
@@ -11,4 +12,6 @@ import com.admn.common.Page;
  */
 public interface ResumeService {
     Layui getResumeByResumeAndPage(String position, Page page);
+
+    ResultEntity invite(Integer resumeId, String status);
 }

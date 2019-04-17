@@ -5,9 +5,11 @@ import com.admn.common.Page;
 import com.admn.common.ResultEntity;
 import com.admn.common.ResultUtil;
 import com.admn.console.service.ResumeService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -48,9 +50,15 @@ public class ResumeController {
         return resumeService.getResumeByResumeAndPage(position, page);
     }
 
-    @GetMapping("invite")
-    public ResultEntity invite(ModelAndView modelAndView) {
-        return null;
+    @PostMapping("invite")
+    public ResultEntity invite(Integer resumeId, String status) {
+        if (resumeId == null) {
+            return new ResultEntity(false, "resumeId不能为空");
+        }
+        if (StringUtils.isBlank(status)) {
+            return new ResultEntity(false, "处理status不能为空");
+        }
+        return resumeService.invite(resumeId, status);
     }
 
 }
