@@ -1,10 +1,15 @@
 package com.admn.console.model;
 
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 @Table(name = "TBL_RESUME")
 public class TblResume implements Serializable {
+
+    @Transient
+    private String degree;
+
     private Integer resumeId;
 
     private Integer userId;
@@ -175,5 +180,13 @@ public class TblResume implements Serializable {
 
     public void setReserved3(String reserved3) {
         this.reserved3 = reserved3;
+    }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setDegree(String degree) {
+        this.degree = degree;
     }
 }

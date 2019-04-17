@@ -3,8 +3,10 @@ package com.admn.web.service.impl;
 import com.admn.common.ResultEntity;
 import com.admn.web.dao.TblEduExpMapper;
 import com.admn.web.dao.TblResumeMapper;
+import com.admn.web.dao.TblWorkExpMapper;
 import com.admn.web.model.TblEduExp;
 import com.admn.web.model.TblResume;
+import com.admn.web.model.TblWorkExp;
 import com.admn.web.service.ResumeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,8 @@ public class ResumeServiceImpl implements ResumeService {
     private TblResumeMapper resumeMapper;
     @Autowired
     private TblEduExpMapper eduExpMapper;
+    @Autowired
+    private TblWorkExpMapper workExpMapper;
 
     @Override
     public List<TblResume> findResumeByUserId(Integer userId) {
@@ -40,6 +44,24 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
+    public TblWorkExp findWorkExp(Integer userId) {
+        return workExpMapper.findByUserId(userId);
+    }
+
+
+    @Override
+    public ResultEntity getInviteMsg(Integer userId) {
+        List<TblResume> list = resumeMapper.findByUserId(userId);
+        if (list.size() != 0) {
+            TblResume resume = list.get(0);
+            if ("00".equals(resume.getReserved2())) {
+                return new ResultEntity(true, "HR主动邀请你参加面试，请联系HR");
+            }
+        }
+        return new ResultEntity(false, "无面试邀请");
+    }
+
+    @Override
     public ResultEntity editBasicInfo(TblResume resume) {
         try {
             if (resumeMapper.findByUserId(resume.getUserId()).size() == 0) {
@@ -52,9 +74,9 @@ public class ResumeServiceImpl implements ResumeService {
             }
         } catch (Exception e) {
             LOGGER.error(">>ResumeServiceImpl, 更新简历失败", e);
-            return new ResultEntity(false, "修改失败");
+            return new ResultEntity(false, "修改基本信息失败");
         }
-        return new ResultEntity(true, "修改成功");
+        return new ResultEntity(true, "修改基本信息成功");
     }
 
     @Override
@@ -70,8 +92,26 @@ public class ResumeServiceImpl implements ResumeService {
             }
         } catch (Exception e) {
             LOGGER.error(">>ResumeServiceImpl, 更新简历失败", e);
-            return new ResultEntity(false, "修改失败");
+            return new ResultEntity(false, "修改教育经历失败");
         }
-        return new ResultEntity(true, "修改成功");
+        return new ResultEntity(true, "修改教育经历成功");
+    }
+
+    @Override
+    public ResultEntity editWorkExp(TblWorkExp workExp) {
+        try {
+            if (workExpMapper.findByUserId(workExp.getUserId()) == null) {
+                workExpMapper.insertSelective(workExp);
+            } else {
+                Example example = new Example(TblWorkExp.class);
+                Example.Criteria criteria = example.createCriteria();
+                criteria.andEqualTo("userId", workExp.getUserId());
+                workExpMapper.updateByExampleSelective(workExp, example);
+            }
+        } catch (Exception e) {
+            LOGGER.error(">>ResumeServiceImpl, 更新简历失败", e);
+            return new ResultEntity(false, "修改工作经历失败");
+        }
+        return new ResultEntity(true, "修改工作经历成功");
     }
 }
