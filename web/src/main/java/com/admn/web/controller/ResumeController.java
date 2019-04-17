@@ -4,6 +4,7 @@ import com.admn.common.ResultEntity;
 import com.admn.common.ResultUtil;
 import com.admn.web.model.TblEduExp;
 import com.admn.web.model.TblResume;
+import com.admn.web.model.TblWorkExp;
 import com.admn.web.service.ResumeService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,20 @@ public class ResumeController {
         }
     }
 
+    @PostMapping("getWorkExpByUserId")
+    @ResponseBody
+    public ResultEntity getWorkExpByUserId(Integer userId) {
+        if (userId == null || userId <= 0) {
+            return new ResultEntity(false, "userId非法");
+        }
+        TblWorkExp workExp = resumeService.findWorkExp(userId);
+        if (workExp != null) {
+            return new ResultEntity(true, "获取resume成功", workExp);
+        } else {
+            return new ResultEntity(true, "该用户无工作经验");
+        }
+    }
+
     @PostMapping("editBasicInfo")
     @ResponseBody
     public ResultEntity editBasicInfo(TblResume resume) {
@@ -83,6 +98,9 @@ public class ResumeController {
         if (StringUtils.isBlank(resume.getMarriage())) {
             return new ResultEntity(false, "婚姻情况不能为空");
         }
+        if (StringUtils.isBlank(resume.getReserved1())) {
+            return new ResultEntity(false, "邮箱不能为空");
+        }
         return resumeService.editBasicInfo(resume);
     }
 
@@ -97,5 +115,18 @@ public class ResumeController {
             return validResult;
         }
         return resumeService.editEduExp(eduExp);
+    }
+
+    @PostMapping("editWorkExp")
+    @ResponseBody
+    public ResultEntity editWorkExp(@Valid TblWorkExp workExp, BindingResult bindingResult) {
+        if (workExp.getUserId() == null || workExp.getUserId() <= 0) {
+            return new ResultEntity(false, "userId为空或非法");
+        }
+        ResultEntity validResult = ResultUtil.validModel(bindingResult);
+        if (!validResult.isSuccess()) {
+            return validResult;
+        }
+        return resumeService.editWorkExp(workExp);
     }
 }

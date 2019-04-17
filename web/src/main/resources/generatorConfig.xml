@@ -27,7 +27,7 @@
         <javaClientGenerator targetPackage="com.admn.web.dao"
                              targetProject="C:\Users\wangyi\IdeaProjects\recruitApi\web\src\main\java" type="XMLMAPPER" />
         <!--数据表-->
-        <table tableName="TBL_EDU_EXP"
+        <table tableName="TBL_WORK_EXP"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false" />
 
