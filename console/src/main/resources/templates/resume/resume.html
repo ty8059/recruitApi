@@ -25,6 +25,7 @@
                     , {field: 'sex', title: '性别', width: 60}
                     , {field: 'birthday', title: '生日', width: 100}
                     , {field: 'userPhone', title: '电话号码', width: 150}
+                    , {field: 'degree', title: '学历', width: 100}
                     , {field: 'marriage', title: '婚姻状况', width: 100}
                     , {field: 'area', title: '地区', width: 70}
                     , {field: 'position', title: '意向岗位', width: 100}
@@ -125,7 +126,7 @@
                             title: "用户信息"
                             ,type: 2
                             ,icon: 1
-                            ,content: '${ctx}/resume/resumeDetail'
+                            ,content: '${ctx}/resume/resumeDetail?resumeId=' + data[0].resumeId
                             ,area: ['800px', '500px']
                             ,btn: ['关闭']
                             ,yes: function(index, layero){

@@ -20,6 +20,11 @@
         <result column="RESERVED2" jdbcType="VARCHAR" property="reserved2"/>
         <result column="RESERVED3" jdbcType="VARCHAR" property="reserved3"/>
     </resultMap>
+
+    <sql id="Union_Column_List">
+        t1.*, t2.DEGREE
+    </sql>
+
     <insert id="insert" parameterType="com.admn.console.model.TblResume">
         insert into TBL_RESUME (RESUME_ID, USER_ID, REAL_NAME,
                                 SEX, BIRTHDAY, USER_PHONE,
@@ -145,11 +150,15 @@
     </insert>
 
     <select id="findByPosition" resultType="com.admn.console.model.TblResume" resultMap="BaseResultMap">
-        select t1.*
+        select
+        <include refid="Union_Column_List"/>
         from TBL_RESUME t1
+        left join TBL_EDU_EXP t2
+        on t1.USER_ID = t2.USER_ID
         where 1 = 1
         <if test="position != null and position != ''">
             and t1.POSITION like CONCAT('%', #{position}, '%')
         </if>
+        order by t1.RESUME_ID asc
     </select>
 </mapper>

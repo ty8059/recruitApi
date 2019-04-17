@@ -35,6 +35,11 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
+    public TblResume getResumeByResumeId(Integer resumeId) {
+        return resumeMapper.findByResumeId(resumeId);
+    }
+
+    @Override
     public ResultEntity invite(Integer resumeId, String status) {
         Example example = new Example(TblResume.class);
         Example.Criteria criteria = example.createCriteria();

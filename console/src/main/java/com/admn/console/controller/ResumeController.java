@@ -4,6 +4,7 @@ import com.admn.common.Layui;
 import com.admn.common.Page;
 import com.admn.common.ResultEntity;
 import com.admn.common.ResultUtil;
+import com.admn.console.model.TblResume;
 import com.admn.console.service.ResumeService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,18 @@ public class ResumeController {
     }
 
     @GetMapping("resumeDetail")
-    public ModelAndView resumeDetail(ModelAndView modelAndView) {
+    public ModelAndView resumeDetail(ModelAndView modelAndView, Integer resumeId) {
         modelAndView.setViewName("/resume/resumeDetail");
+        if (resumeId == null) {
+            modelAndView.addObject("errorMsg", "resumeId为空");
+            return modelAndView;
+        }
+        TblResume resume = resumeService.getResumeByResumeId(resumeId);
+        if (resume == null) {
+            modelAndView.addObject("errorMsg", "该简历不存在");
+        } else {
+            modelAndView.addObject("resume", resume);
+        }
         return modelAndView;
     }
 

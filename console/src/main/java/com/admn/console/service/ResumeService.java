@@ -3,6 +3,7 @@ package com.admn.console.service;
 import com.admn.common.Layui;
 import com.admn.common.Page;
 import com.admn.common.ResultEntity;
+import com.admn.console.model.TblResume;
 
 /**
  * @Author wangyi
@@ -12,6 +13,8 @@ import com.admn.common.ResultEntity;
  */
 public interface ResumeService {
     Layui getResumeByResumeAndPage(String position, Page page);
+
+    TblResume getResumeByResumeId(Integer resumeId);
 
     ResultEntity invite(Integer resumeId, String status);
 }
