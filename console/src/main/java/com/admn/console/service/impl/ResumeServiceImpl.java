@@ -3,8 +3,12 @@ package com.admn.console.service.impl;
 import com.admn.common.Layui;
 import com.admn.common.Page;
 import com.admn.common.ResultEntity;
+import com.admn.console.dao.TblEduExpMapper;
 import com.admn.console.dao.TblResumeMapper;
+import com.admn.console.dao.TblWorkExpMapper;
+import com.admn.console.model.TblEduExp;
 import com.admn.console.model.TblResume;
+import com.admn.console.model.TblWorkExp;
 import com.admn.console.service.ResumeService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -25,6 +29,10 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Autowired
     private TblResumeMapper resumeMapper;
+    @Autowired
+    private TblWorkExpMapper workExpMapper;
+    @Autowired
+    private TblEduExpMapper eduExpMapper;
 
     @Override
     public Layui getResumeByResumeAndPage(String position, Page page) {
@@ -37,6 +45,16 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public TblResume getResumeByResumeId(Integer resumeId) {
         return resumeMapper.findByResumeId(resumeId);
+    }
+
+    @Override
+    public TblEduExp getEduExpByUserId(Integer userId) {
+        return eduExpMapper.findEduExpByUserId(userId);
+    }
+
+    @Override
+    public TblWorkExp getWorkExpByUserId(Integer userId) {
+        return workExpMapper.findWorkExpByUserId(userId);
     }
 
     @Override

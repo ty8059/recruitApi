@@ -4,7 +4,9 @@ import com.admn.common.Layui;
 import com.admn.common.Page;
 import com.admn.common.ResultEntity;
 import com.admn.common.ResultUtil;
+import com.admn.console.model.TblEduExp;
 import com.admn.console.model.TblResume;
+import com.admn.console.model.TblWorkExp;
 import com.admn.console.service.ResumeService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,14 @@ public class ResumeController {
             return modelAndView;
         }
         TblResume resume = resumeService.getResumeByResumeId(resumeId);
+        TblWorkExp workExp = resumeService.getWorkExpByUserId(resume.getUserId());
+        TblEduExp eduExp = resumeService.getEduExpByUserId(resume.getUserId());
+        if (workExp != null) {
+            modelAndView.addObject("workExp", workExp);
+        }
+        if (eduExp != null) {
+            modelAndView.addObject("eduExp", eduExp);
+        }
         if (resume == null) {
             modelAndView.addObject("errorMsg", "该简历不存在");
         } else {

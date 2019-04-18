@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.admn.console.dao.TblWorkExpMapper">
+    <resultMap id="BaseResultMap" type="com.admn.console.model.TblWorkExp">
+        <result column="USER_ID" jdbcType="INTEGER" property="userId"/>
+        <result column="START_TIME" jdbcType="VARCHAR" property="startTime"/>
+        <result column="END_TIME" jdbcType="VARCHAR" property="endTime"/>
+        <result column="COMPANY" jdbcType="VARCHAR" property="company"/>
+        <result column="POSITION" jdbcType="VARCHAR" property="position"/>
+        <result column="DESCRIPTION" jdbcType="VARCHAR" property="description"/>
+        <result column="RESERVED1" jdbcType="VARCHAR" property="reserved1"/>
+        <result column="RESERVED2" jdbcType="VARCHAR" property="reserved2"/>
+        <result column="RESERVED3" jdbcType="VARCHAR" property="reserved3"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.admn.console.model.TblWorkExp">
+        insert into TBL_WORK_EXP (USER_ID, START_TIME, END_TIME,
+                                  COMPANY, POSITION, DESCRIPTION,
+                                  RESERVED1, RESERVED2, RESERVED3)
+        values (#{userId,jdbcType=INTEGER}, #{startTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR},
+                #{company,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+                #{reserved1,jdbcType=VARCHAR}, #{reserved2,jdbcType=VARCHAR}, #{reserved3,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.admn.console.model.TblWorkExp">
+        insert into TBL_WORK_EXP
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="startTime != null">
+                START_TIME,
+            </if>
+            <if test="endTime != null">
+                END_TIME,
+            </if>
+            <if test="company != null">
+                COMPANY,
+            </if>
+            <if test="position != null">
+                POSITION,
+            </if>
+            <if test="description != null">
+                DESCRIPTION,
+            </if>
+            <if test="reserved1 != null">
+                RESERVED1,
+            </if>
+            <if test="reserved2 != null">
+                RESERVED2,
+            </if>
+            <if test="reserved3 != null">
+                RESERVED3,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=VARCHAR},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null">
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved1 != null">
+                #{reserved1,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved2 != null">
+                #{reserved2,jdbcType=VARCHAR},
+            </if>
+            <if test="reserved3 != null">
+                #{reserved3,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>
