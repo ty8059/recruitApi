@@ -11,16 +11,16 @@
         <#if errorMsg??>
         layer.msg(${(errorMsg)!""});
         </#if>
-        if('${position.workType}' === '00') {
+        if('${(position.workType)!""}' === '00') {
             $("#workType").val("全职");
-        } else if('${position.workType}' === '01') {
+        } else if('${(position.workType)!""}' === '01') {
             $("#workType").val("兼职");
-        }else if('${position.workType}' === '02') {
+        }else if('${(position.workType)!""}' === '02') {
             $("#workType").val("实习");
         }
-        if('${position.salaryType}' === '01') {
+        if('${(position.salaryType)!""}' === '01') {
             $("#salaryType").val("日薪");
-        } else if ('${position.salaryType}' === '00') {
+        } else if ('${(position.salaryType)!""}' === '00') {
             $("#salaryType").val("月薪");
         }
 
