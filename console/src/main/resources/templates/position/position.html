@@ -21,10 +21,10 @@
                     {type:'radio'}
                     , {field: 'positionId', title: '职位ID', width: 100, sort: true, hide:true}
                     , {field: 'positionName', title: '职位名', width: 100}
-                    , {field: 'workType', title: '工作类型', width: 80}
+                    , {field: 'workType', title: '工作类型', width: 100}
                     , {field: 'salary', title: '薪资', width: 100}
                     , {field: 'salaryType', title: '薪资类型', width: 100}
-                    , {field: 'eduRequirement', title: '教育要求', width: 80}
+                    , {field: 'eduRequirement', title: '教育要求', width: 100}
                     , {field: 'workRequirement', title: '工作要求', width: 150}
                     , {field: 'workArea', title: '工作地区', width: 100}
                     , {field: 'workDescription', title: '工作描述', width: 200}
@@ -49,6 +49,22 @@
                     $("[data-field='workDescription']").children().each(function(){
                         var str = $(this).text();
                         $(this).text(str.substr(0, 10));
+                    });
+                    $("[data-field='workType']").children().each(function(){
+                        if($(this).text() === '00'){
+                            $(this).text("全职");
+                        }else if($(this).text() === '01'){
+                            $(this).text("兼职");
+                        }else if($(this).text() === '02'){
+                            $(this).text("实习");
+                        }
+                    });
+                    $("[data-field='salaryType']").children().each(function(){
+                        if($(this).text() === '01'){
+                            $(this).text("日薪");
+                        }else if($(this).text() === '00'){
+                            $(this).text("月薪");
+                        }
                     });
                 }
             });
