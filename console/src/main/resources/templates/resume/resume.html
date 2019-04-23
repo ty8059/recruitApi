@@ -150,8 +150,12 @@
                                 status: '00'
                             },
                             success: function (result) {
-                                console.log(result);
                                 layer.msg(result.msg);
+                                table.reload('dataGrid', {
+                                    where: {
+                                        'position': position
+                                    }
+                                });
                             }
                         });
                         break;

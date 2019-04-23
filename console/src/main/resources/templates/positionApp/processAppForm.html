@@ -1,0 +1,49 @@
+<#include "../_layout.html">
+<@layout>
+<script type="text/javascript">
+    $(function () {
+        layui.use(['form', 'layer', 'table'], function () {
+            var table = layui.table
+                , form = layui.form
+                , layer = layui.layer;
+        });
+
+        <#if errorMsg??>
+        layer.msg(${(errorMsg)!""});
+        </#if>
+    });
+    function processApp() {
+        var status = $('#status').val();
+        $.ajax({
+            url: '${ctx}/positionApp/processApp',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                status: status,
+                userId: ${positionApp.userId},
+                resumeId: ${positionApp.resumeId},
+                positionId: ${positionApp.positionId}
+            },
+            success: function (result) {
+                layer.msg(result.msg);
+            }
+        });
+
+    }
+</script>
+<body>
+<div class="layui-form" style="margin-top: 25px">
+ <div class="layui-input-block">
+    <select id="status" name="status" lay-verify="required">
+        <option value="" selected="selected">请选择</option>
+        <option value="00">已通过</option>
+        <option value="99">待处理</option>
+        <option value="01">未通过</option>
+    </select>
+ </div>
+</div>
+ <div class="layui-btn-container" style="margin-left: 200px">
+     <button class="layui-btn layui-btn-sm" type="button" style="background-color: #A48566" onclick="processApp()">立即提交</button>
+ </div>
+</body>
+</@layout>

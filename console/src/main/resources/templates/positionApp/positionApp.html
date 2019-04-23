@@ -7,7 +7,6 @@
     $(function () {
         layui.use(['form', 'layer', 'table'], function () {
             var table = layui.table
-                , form = layui.form
                 , layer = layui.layer;
 
             table.render({
@@ -19,14 +18,13 @@
                 , cellMinWidth: 80
                 , cols: [[
                     {type:'radio'}
-                    , {field: 'positionId', title: '职位ID', width: 100, sort: true}
-                    , {field: 'userId', title: '用户ID', width: 100}
-                    , {field: 'resumeId', title: '简历ID', width: 80}
+                    , {field: 'positionId', title: '职位ID', width: 100, sort: true, hide:true}
+                    , {field: 'userId', title: '用户ID', width: 100, hide:true}
+                    , {field: 'resumeId', title: '简历ID', width: 80, hide:true}
                     , {field: 'positionName', title: '职位名称', width: 200}
                     , {field: 'realName', title: '真实姓名', width: 100}
                     , {field: 'status', title: '状态', width: 80}
                     , {field: 'appTime', title: '申请时间', width: 150}
-                    , {field: 'processTime', title: '处理时间', width: 100}
                 ]]
                 , page: {
                     layout: ['limit', 'count', 'prev', 'page', 'next']
@@ -75,10 +73,14 @@
                             title: "职位信息"
                             ,type: 2
                             ,icon: 1
-                            ,content: '${ctx}/position/resumeForm?userId='
-                            ,area: ['800px', '500px']
-                            ,btn: ['关闭']
-                            ,yes: function(index, layero){
+                            ,content: '${ctx}/positionApp/processAppForm?userId=' + data[0].userId + '&positionId=' + data[0].positionId + '&resumeId=' + data[0].resumeId
+                            ,area: ['250px', '250px']
+                            ,cancel: function(index, layero){
+                                table.reload('dataGrid', {
+                                    where: {
+                                        'status': status
+                                    }
+                                });
                                 layer.close(index);
                             }
                         });

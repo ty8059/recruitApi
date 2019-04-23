@@ -11,6 +11,19 @@
         <#if errorMsg??>
         layer.msg(${(errorMsg)!""});
         </#if>
+        if('${position.workType}' === '00') {
+            $("#workType").val("全职");
+        } else if('${position.workType}' === '01') {
+            $("#workType").val("兼职");
+        }else if('${position.workType}' === '02') {
+            $("#workType").val("实习");
+        }
+        if('${position.salaryType}' === '01') {
+            $("#salaryType").val("日薪");
+        } else if ('${position.salaryType}' === '00') {
+            $("#salaryType").val("月薪");
+        }
+
     });
     function addPosition() {
         <#if position??>
@@ -21,9 +34,21 @@
             var positionId = '';
         </#if>
         var positionName = $('#positionName').val();
-        var workType = $('#workType').val();
         var salary = $('#salary').val().replace(',', '');
+        var workType = $('#workType').val();
+        if(workType === '全职') {
+            workType = '00'
+        } else if(workType === '兼职') {
+            workType = '01'
+        } else if(workType === '实习') {
+            workType = '02'
+        }
         var salaryType = $('#salaryType').val();
+        if(salaryType === '月薪') {
+            salaryType = '00';
+        } else if(salaryType === '日薪') {
+            salaryType = '01';
+        }
         var eduRequirement = $('#eduRequirement').val();
         var workRequirement = $('#workRequirement').val();
         var workArea = $('#workArea').val();
@@ -69,7 +94,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label" style="text-align: left">工作类型:</label>
                         <div class="layui-input-block">
-                            <input id="workType" name="workType" type="text"  value="${(position.workType)!""}" autocomplete="off" class="layui-input">
+                            <input id="workType" name="workType" type="text" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </td>
@@ -89,7 +114,7 @@
                     <div class="layui-form-item" style="margin-left:15px;">
                         <label class="layui-form-label" style="text-align: left">薪资类型:</label>
                         <div class="layui-input-block">
-                            <input id="salaryType" name="salaryType" type="text" value="${(position.salaryType)!""}" autocomplete="off" class="layui-input">
+                            <input id="salaryType" name="salaryType" type="text" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </td>
