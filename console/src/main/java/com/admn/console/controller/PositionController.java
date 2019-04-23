@@ -27,6 +27,16 @@ public class PositionController {
         return modelAndView;
     }
 
+    @RequestMapping("positionForm")
+    public ModelAndView positionForm(Integer positionId, ModelAndView modelAndView) {
+        if (positionId != null) {
+            TblPosition position = positionService.getByPositionId(positionId);
+            modelAndView.addObject("position", position);
+        }
+        modelAndView.setViewName("position/positionForm");
+        return modelAndView;
+    }
+
     @RequestMapping("addPosition")
     public ResultEntity addPosition(@Valid TblPosition position, BindingResult bindingResult) {
         ResultEntity validResult = ResultUtil.validModel(bindingResult);

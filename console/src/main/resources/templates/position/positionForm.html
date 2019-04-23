@@ -1,0 +1,144 @@
+<#include "../_layout.html">
+<@layout>
+<script type="text/javascript">
+    $(function () {
+        layui.use(['form', 'layer', 'table'], function () {
+            var table = layui.table
+                , form = layui.form
+                , layer = layui.layer;
+        });
+
+        <#if errorMsg??>
+        layer.msg(${(errorMsg)!""});
+        </#if>
+    });
+    function addPosition() {
+        <#if position??>
+            var url = 'editPosition';
+            var positionId = '${position.positionId}';
+        <#else>
+            var url = 'addPosition';
+            var positionId = '';
+        </#if>
+        var positionName = $('#positionName').val();
+        var workType = $('#workType').val();
+        var salary = $('#salary').val().replace(',', '');
+        var salaryType = $('#salaryType').val();
+        var eduRequirement = $('#eduRequirement').val();
+        var workRequirement = $('#workRequirement').val();
+        var workArea = $('#workArea').val();
+        var workDescription = $('#workDescription').val();
+        $.ajax({
+            url: '${ctx}/position/' + url,
+            type: 'post',
+            dataType: 'json',
+            data: {
+                positionId: positionId,
+                positionName: positionName,
+                workType: workType,
+                salary: salary,
+                salaryType: salaryType,
+                eduRequirement: eduRequirement,
+                workRequirement: workRequirement,
+                workArea: workArea,
+                workDescription: workDescription
+            },
+            success: function (result) {
+                layer.msg(result.msg);
+            }
+        });
+    }
+
+</script>
+<body>
+<form class="layui-form" action=""style="padding-right: 20px;">
+    <div class="layui-form" style="margin-top: 25px">
+        <table style="margin: 0;padding: 0;">
+            <tr>
+                <td>
+                    <#--岗位名称positionName-->
+                    <div class="layui-form-item" style="margin-left:15px;">
+                        <label class="layui-form-label" style="text-align: left">岗位名称:</label>
+                        <div class="layui-input-block">
+                            <input id="positionName" name="positionName" type="text" value="${(position.positionName)!""}" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <#--工作类型-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="text-align: left">工作类型:</label>
+                        <div class="layui-input-block">
+                            <input id="workType" name="workType" type="text"  value="${(position.workType)!""}" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <#--薪资-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="text-align: left">薪资:</label>
+                        <div class="layui-input-block">
+                            <input id="salary" name="salary" type="text"  value="${(position.salary)!""}" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <#--薪资类型-->
+                    <div class="layui-form-item" style="margin-left:15px;">
+                        <label class="layui-form-label" style="text-align: left">薪资类型:</label>
+                        <div class="layui-input-block">
+                            <input id="salaryType" name="salaryType" type="text" value="${(position.salaryType)!""}" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <#--教育要求-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="text-align: left">教育要求:</label>
+                        <div class="layui-input-block">
+                            <input id="eduRequirement" name="eduRequirement" type="text" value="${(position.eduRequirement)!""}" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <#--工作要求-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="text-align: left">工作要求:</label>
+                        <div class="layui-input-block">
+                            <input id="workRequirement" name="workRequirement" type="text"  autocomplete="off" value="${(position.workRequirement)!""}" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <#--工作地区-->
+                    <div class="layui-form-item" style="margin-left:15px;">
+                        <label class="layui-form-label" style="text-align: left">工作地区:</label>
+                        <div class="layui-input-block">
+                            <input id="workArea" name="workArea" type="text" value="${(position.workArea)!""}" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <#--工作描述-->
+                    <div class="layui-form-item" style="margin-left:15px;">
+                        <label class="layui-form-label" style="text-align: left">工作描述:</label>
+                        <div class="layui-input-block">
+                            <input id="workDescription" name="workDescription" type="text" value="${(position.workDescription)!""}" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="layui-btn-container" style="margin-left: 200px">
+        <button class="layui-btn layui-btn-sm" type="button" style="background-color: #A48566" onclick="addPosition()">立即提交</button>
+    </div>
+</form>
+</body>
+</@layout>

@@ -20,6 +20,7 @@ public class PositionServiceImpl implements PositionService {
     @Autowired
     private TblPositionMapper positionMapper;
 
+    @Override
     public TblPosition getByPositionId(Integer positionId) {
         return positionMapper.getByPositionId(positionId);
     }

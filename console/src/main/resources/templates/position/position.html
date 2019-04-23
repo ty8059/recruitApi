@@ -57,7 +57,24 @@
                 var positionName = $("#positionName").val();
                 var checkStatus = table.checkStatus(obj.config.id);
                 switch(obj.event){
-                    case 'view':
+                    case 'add':
+                        layer.open({
+                            title: "职位信息"
+                            ,type: 2
+                            ,icon: 1
+                            ,content: '${ctx}/position/positionForm'
+                            ,area: ['800px', '400px']
+                            ,cancel: function(index){
+                                table.reload('dataGrid', {
+                                    where: {
+                                        'positionName': positionName
+                                    }
+                                });
+                                layer.close(index);
+                            }
+                        });
+                        break;
+                    case 'edit':
                         var data = checkStatus.data;
                         if (data.length === 0) {
                             layer.msg("请选中一条记录");
@@ -67,22 +84,17 @@
                             title: "职位信息"
                             ,type: 2
                             ,icon: 1
-                            ,content: '${ctx}/position/resumeForm?userId=' /*+ data[0].userid*/
-                            ,area: ['800px', '500px']
-                            ,btn: ['关闭']
-                            ,yes: function(index, layero){
+                            ,content: '${ctx}/position/positionForm?positionId=' + data[0].positionId
+                            ,area: ['800px', '400px']
+                            ,cancel: function (index) {
+                                table.reload('dataGrid', {
+                                    where: {
+                                        'positionName': positionName
+                                    }
+                                });
                                 layer.close(index);
                             }
                         });
-                        break;
-                    case 'freeze':
-                        var data = checkStatus.data;
-                        if (data.length === 0) {
-                            layer.msg("请选中一条记录");
-                            return;
-                        }
-                        break;
-                    case 'recover':
                         break;
                     case 'query':
                         table.reload('dataGrid', {
@@ -101,8 +113,8 @@
 <#--操作按钮-->
     <script type="text/html" id="toolbar">
         <div class="layui-btn-container">
-            <button class="layui-btn layui-btn-sm" style="background-color: #A48566" lay-event="view">详细</button>
-            <button class="layui-btn layui-btn-sm" style="background-color: #A48566" lay-event="recover">处理</button>
+            <button class="layui-btn layui-btn-sm" style="background-color: #A48566" lay-event="add">新增</button>
+            <button class="layui-btn layui-btn-sm" style="background-color: #A48566" lay-event="edit">编辑</button>
             <button class="layui-btn layui-btn-sm" style="background-color: #A48566" lay-event="query">查询</button>
         </div>
     </script>

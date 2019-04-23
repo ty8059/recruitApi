@@ -103,22 +103,27 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>${(workExp.startTime)?substring(0, 8)!"暂无"}</td>
-                    <td>${(workExp.endTime)?substring(0, 8)!"暂无"}</td>
+                    <td>
+                        <#if workExp??>
+                            ${(workExp.startTime)?substring(0, 8)}
+                        <#else>
+                            暂无
+                        </#if>
+                    </td>
+                    <td>
+                        <#if workExp??>
+                            ${(workExp.endTime)?substring(0, 8)}
+                        <#else>
+                            暂无
+                        </#if>
+                    </td>
                     <td>${(workExp.company)!"暂无"}</td>
                     <td>${(workExp.position)!"暂无"}</td>
                     <td>${(workExp.description)!"暂无"}</td>
                 </tr>
                 </tbody>
             </table>
-        <#--</#list>-->
-
-
     </div>
-
-
-
-
 </form>
 </body>
 </@layout>
