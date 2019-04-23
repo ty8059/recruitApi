@@ -17,8 +17,8 @@
          } else if('${(resume.sex)!""}' === '00') {
              $("#sex").val("男");
          }
-
     });
+
 </script>
 <body>
 <form class="layui-form" action=""style="padding-right: 20px;">
@@ -27,8 +27,8 @@
             <tr>
                 <td>
                     <#--岗位名称positionName-->
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">岗位名称:</label>
+                    <div class="layui-form-item" style="margin-left:15px;">
+                        <label class="layui-form-label" style="text-align: left">岗位名称:</label>
                         <div class="layui-input-block">
                             <input id="positionName" name="positionName" type="text" value="${(resume.position)!""}" autocomplete="off" class="layui-input">
                         </div>
@@ -37,7 +37,7 @@
                 <td>
                     <#--姓名-->
                     <div class="layui-form-item">
-                        <label class="layui-form-label">姓名</label>
+                        <label class="layui-form-label" style="text-align: left">姓名:</label>
                         <div class="layui-input-block">
                             <input id="userName" name="userName" type="text"  value="${(resume.realName)!""}" autocomplete="off" class="layui-input">
                         </div>
@@ -46,27 +46,27 @@
                 <td>
                     <#--学历-->
                     <div class="layui-form-item">
-                        <label class="layui-form-label">学历</label>
+                        <label class="layui-form-label" style="text-align: left">学历:</label>
                         <div class="layui-input-block">
-                            <input id="degree" name="degree" type="text"  value="${(resume.degree)!""}" autocomplete="off" class="layui-input">
+                            <input id="degree" name="degree" type="text"  value="${(eduExp.degree)!"暂无"}" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <#--岗位名称positionName-->
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">性别:</label>
+                    <#--性别-->
+                    <div class="layui-form-item" style="margin-left:15px;">
+                        <label class="layui-form-label" style="text-align: left">性别:</label>
                         <div class="layui-input-block">
                             <input id="sex" name="sex" type="text"  autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </td>
                 <td>
-                    <#--用户类型-->
+                    <#--手机-->
                     <div class="layui-form-item">
-                        <label class="layui-form-label">手机号码</label>
+                        <label class="layui-form-label" style="text-align: left">手机号码:</label>
                         <div class="layui-input-block">
                             <input id="telNumber" name="telNumber" type="text"  value="${(resume.userPhone)!""}" autocomplete="off" class="layui-input">
                         </div>
@@ -75,7 +75,7 @@
                 <td>
                     <#--居住地-->
                     <div class="layui-form-item">
-                        <label class="layui-form-label">居住地</label>
+                        <label class="layui-form-label" style="text-align: left">居住地:</label>
                         <div class="layui-input-block">
                             <input id="address" name="address" type="text"  autocomplete="off" value="${(resume.address)!""}" class="layui-input">
                         </div>
@@ -84,17 +84,46 @@
             </tr>
 
         </table>
-        <div class="layui-form-label">工作经验：</div>
+        <div class="layui-form-label" style="margin-left:15px;text-align: left">工作经验：</div>
        <#--<#list flowerList as flower>-->
-            <input id="workExeperience" name="workExeperience" type="text"  autocomplete="off"  class="layui-input" style="margin-left: 10px">
-        <#--</#list>-->
-
-
+            <table class="layui-table" style="margin-left: 15px" >
+                <colgroup>
+                    <col width="150">
+                    <col width="200">
+                    <col>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th style="text-align: left">开始时间</th>
+                    <th>结束时间</th>
+                    <th>公司</th>
+                    <th>职位</th>
+                    <th>介绍</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <#if workExp??>
+                            ${(workExp.startTime)?substring(0, 8)}
+                        <#else>
+                            暂无
+                        </#if>
+                    </td>
+                    <td>
+                        <#if workExp??>
+                            ${(workExp.endTime)?substring(0, 8)}
+                        <#else>
+                            暂无
+                        </#if>
+                    </td>
+                    <td>${(workExp.company)!"暂无"}</td>
+                    <td>${(workExp.position)!"暂无"}</td>
+                    <td>${(workExp.description)!"暂无"}</td>
+                </tr>
+                </tbody>
+            </table>
     </div>
-
-
-
-
 </form>
 </body>
 </@layout>

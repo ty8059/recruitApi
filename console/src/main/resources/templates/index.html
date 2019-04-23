@@ -20,24 +20,6 @@
                     </a>
                 </li>
             </ul>
-            <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
-                <li class="layui-nav-item layui-hide-xs" lay-unselect>
-                    <a href="javascript:;" layadmin-event="fullscreen">
-                        <i class="layui-icon layui-icon-screen-full"></i>
-                    </a>
-                </li>
-                <li class="layui-nav-item" lay-unselect>
-                    <a href="javascript:;">
-                        <cite>吴兆裕</cite>
-                    </a>
-                    <dl class="layui-nav-child">
-                        <dd><a lay-href="sysUser/userform?userId=">基本资料</a></dd>
-                        <dd><a lay-href="sysUser/password?userId=">修改密码</a></dd>
-                        <hr>
-                        <dd style="text-align: center;"><a href="/logout">退出</a></dd>
-                    </dl>
-                </li>
-            </ul>
         </div>
 
         <!-- 侧边菜单 -->
@@ -60,15 +42,6 @@
                             </dd>
                         </dl>
                     </li>
-                    <li data-name="sysMngr" class="layui-nav-item">
-                        <a href="javascript:;" lay-tips="系统管理" lay-direction="2">
-                            <i class="layui-icon layui-icon-template"></i>
-                            <cite>系统管理</cite>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a lay-href="sysCode">参数管理</a></dd>
-                        </dl>
-                    </li>
                     <li data-name="goodMngr" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="职位管理" lay-direction="2">
                             <i class="layui-icon layui-icon-app"></i>
@@ -78,37 +51,6 @@
                             <dd><a lay-href="/position">职位管理</a></dd>
                             <dd><a lay-href="/positionApp">申请审核</a></dd>
                             <dd><a lay-href="/resume">面试邀请</a></dd>
-
-                        </dl>
-                    </li>
-                    <li data-name="user" class="layui-nav-item">
-                        <a href="javascript:;" lay-tips="用户管理" lay-direction="2">
-                            <i class="layui-icon layui-icon-user"></i>
-                            <cite>用户管理</cite>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a lay-href="user">网站用户</a></dd>
-                        </dl>
-                    </li>
-                    <li data-name="set" class="layui-nav-item">
-                        <a href="javascript:;" lay-tips="设置" lay-direction="2">
-                            <i class="layui-icon layui-icon-set"></i>
-                            <cite>设置</cite>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd class="layui-nav-itemed">
-                                <a href="javascript:;">系统设置</a>
-                                <dl class="layui-nav-child">
-                                    <dd><a lay-href="mail">邮件服务</a></dd>
-                                </dl>
-                            </dd>
-                            <dd class="layui-nav-itemed">
-                                <a href="javascript:;">我的设置</a>
-                                <dl class="layui-nav-child">
-                                    <dd><a lay-href="sysUser/userform?userId=">基本资料</a></dd>
-                                    <dd><a lay-href="sysUser/password?userId=">修改密码</a></dd>
-                                </dl>
-                            </dd>
                         </dl>
                     </li>
                 </ul>

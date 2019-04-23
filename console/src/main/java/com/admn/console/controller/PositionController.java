@@ -27,6 +27,16 @@ public class PositionController {
         return modelAndView;
     }
 
+    @RequestMapping("positionForm")
+    public ModelAndView positionForm(Integer positionId, ModelAndView modelAndView) {
+        if (positionId != null) {
+            TblPosition position = positionService.getByPositionId(positionId);
+            modelAndView.addObject("position", position);
+        }
+        modelAndView.setViewName("position/positionForm");
+        return modelAndView;
+    }
+
     @RequestMapping("addPosition")
     public ResultEntity addPosition(@Valid TblPosition position, BindingResult bindingResult) {
         ResultEntity validResult = ResultUtil.validModel(bindingResult);
@@ -46,6 +56,14 @@ public class PositionController {
             return new ResultEntity(false, validResult.getMsg());
         }
         return positionService.editPosition(position);
+    }
+
+    @RequestMapping("delPosition")
+    public ResultEntity delPosition(Integer positionId) {
+        if (positionId == null) {
+            return new ResultEntity(false, "positionId不能为空");
+        }
+        return positionService.delPosition(positionId);
     }
 
     @RequestMapping("dataGrid")

@@ -1,29 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="zh" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>招聘系统登录</title>
+        <link rel="stylesheet" href="/static/css/login/reset.css">
+        <link rel="stylesheet" href="/static/css/login/supersized.css">
+        <link rel="stylesheet" href="/static/css/login/style.css">
+        <script src="/static/js/jquery-1.8.2.min.js"></script>
+        <script src="/static/js/supersized.3.2.7.min.js"></script>
+        <script src="/static/js/supersized-init.js"></script>
+        <script src="/static/js/scripts.js"></script>
+        <script src="/static/layuiadmin/layui/layui.js"></script>
 
-</head>
-<body>
-<div style="width:500px;float: right;margin:0 auto;" >
-    <label for="username" style="font-size:18px" >用户名：</label>
-    <div style="height:35px;width:400px;position:relative;display:inline" >   <!--相关位置--> <!--此处为相关位置与绝对位置联合使用-->
-        <input id="username" type="text" style="height:30px;width:350px;padding-right:50px;">
-        <span style="position:absolute;right:18px;top:2px;background-image:url(user.ico);height:16px;width:16px;display:inline-block;"></span>  <!--绝对位置-->
-    </div>
-    <br/>
-    <br/>
-    <label for="password1" style="font-size:18px" > 密码：</label>
-    <div style="height:35px;width:400px;position:relative;display:inline" >   <!--相关位置--> <!--此处为相关位置与绝对位置联合使用-->
-        <input id="password1" type="text" style="height:30px;width:350px;padding-right:50px;">
-        <span style="position:absolute;right:16px;top:2px;background-image:url(p.ico);height:16px;width:16px;display:inline-block;"></span>  <!--绝对位置-->
-    </div>
+        <script type="text/javascript">
 
-    <div style="width:426px;float: right;">
-        <input type="submit" value="登录" style="height:30px;width:400px;background-color:red;"/>
-    </div>
-</div>
+            function doLogin() {
+                var username = $('#username').val();
+                var password = $('#password').val();
+                $.ajax({
+                    url: '/login/doLogin',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        username: username,
+                        password: password
+                    },
+                    success: function (result) {
+                        if (!result.success) {
+                            layer.msg(result.msg);
+                        } else {
+                            location.href = "/index";
+                        }
+                    }
+                });
+            }
 
-</body>
+            $(function () {
+                layui.use(['form', 'layer', 'table'], function () {
+                    var layer = layui.layer;
+                });
+            })
+        </script>
+    </head>
+    <body>
+        <div class="page-container">
+            <h1>招聘系统管理控制台</h1>
+            <form>
+                <input type="text" id="username" name="username" class="username" placeholder="用户名">
+                <input type="password" id="password" name="password" class="password" placeholder="请输入密码">
+                <button id="loginBtn" type="button" onclick="doLogin()">登录</button>
+                <div class="error"><span>+</span></div>
+            </form>
+        </div>
+    </body>
 </html>
+

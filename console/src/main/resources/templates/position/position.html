@@ -19,18 +19,19 @@
                 , cellMinWidth: 80
                 , cols: [[
                     {type:'radio'}
-                    , {field: 'positionId', title: '职位ID', width: 100, sort: true}
+                    , {field: 'positionId', title: '职位ID', width: 100, sort: true, hide:true}
                     , {field: 'positionName', title: '职位名', width: 100}
-                    , {field: 'workType', title: '工作类型', width: 80}
+                    , {field: 'workType', title: '工作类型', width: 100}
                     , {field: 'salary', title: '薪资', width: 100}
                     , {field: 'salaryType', title: '薪资类型', width: 100}
-                    , {field: 'eduRequirement', title: '教育要求', width: 80}
+                    , {field: 'eduRequirement', title: '教育要求', width: 100}
                     , {field: 'workRequirement', title: '工作要求', width: 150}
                     , {field: 'workArea', title: '工作地区', width: 100}
                     , {field: 'workDescription', title: '工作描述', width: 200}
                 ]]
                 , page: {
                     layout: ['limit', 'count', 'prev', 'page', 'next']
+                    , theme: '#A48566'
                     , groups: 1
                 }
                 , request: {
@@ -49,6 +50,22 @@
                         var str = $(this).text();
                         $(this).text(str.substr(0, 10));
                     });
+                    $("[data-field='workType']").children().each(function(){
+                        if($(this).text() === '00'){
+                            $(this).text("全职");
+                        }else if($(this).text() === '01'){
+                            $(this).text("兼职");
+                        }else if($(this).text() === '02'){
+                            $(this).text("实习");
+                        }
+                    });
+                    $("[data-field='salaryType']").children().each(function(){
+                        if($(this).text() === '01'){
+                            $(this).text("日薪");
+                        }else if($(this).text() === '00'){
+                            $(this).text("月薪");
+                        }
+                    });
                 }
             });
 
@@ -56,7 +73,24 @@
                 var positionName = $("#positionName").val();
                 var checkStatus = table.checkStatus(obj.config.id);
                 switch(obj.event){
-                    case 'view':
+                    case 'add':
+                        layer.open({
+                            title: "职位信息"
+                            ,type: 2
+                            ,icon: 1
+                            ,content: '${ctx}/position/positionForm'
+                            ,area: ['800px', '400px']
+                            ,cancel: function(index){
+                                table.reload('dataGrid', {
+                                    where: {
+                                        'positionName': positionName
+                                    }
+                                });
+                                layer.close(index);
+                            }
+                        });
+                        break;
+                    case 'edit':
                         var data = checkStatus.data;
                         if (data.length === 0) {
                             layer.msg("请选中一条记录");
@@ -66,25 +100,42 @@
                             title: "职位信息"
                             ,type: 2
                             ,icon: 1
-                            ,content: '${ctx}/position/resumeForm?userId=' /*+ data[0].userid*/
-                            ,area: ['800px', '500px']
-                            ,btn: ['关闭']
-                            ,yes: function(index, layero){
+                            ,content: '${ctx}/position/positionForm?positionId=' + data[0].positionId
+                            ,area: ['800px', '400px']
+                            ,cancel: function (index) {
+                                table.reload('dataGrid', {
+                                    where: {
+                                        'positionName': positionName
+                                    }
+                                });
                                 layer.close(index);
                             }
                         });
                         break;
-                    case 'freeze':
+                    case 'del':
                         var data = checkStatus.data;
                         if (data.length === 0) {
                             layer.msg("请选中一条记录");
                             return;
                         }
-                        break;
-                    case 'recover':
+                        $.ajax({
+                            url: '${ctx}/position/delPosition',
+                            type: 'post',
+                            dataType: 'json',
+                            data: {
+                                positionId: data[0].positionId
+                            },
+                            success: function (result) {
+                                layer.msg(result.msg);
+                                table.reload('dataGrid', {
+                                    where: {
+                                        'positionName': positionName
+                                    }
+                                });
+                            }
+                        });
                         break;
                     case 'query':
-                        console.log(positionName);
                         table.reload('dataGrid', {
                             where: {
                                 'positionName': positionName
@@ -101,9 +152,10 @@
 <#--操作按钮-->
     <script type="text/html" id="toolbar">
         <div class="layui-btn-container">
-            <button class="layui-btn layui-btn-sm" lay-event="view">详细</button>
-            <button class="layui-btn layui-btn-sm" lay-event="recover">处理</button>
-            <button class="layui-btn layui-btn-sm" lay-event="query">查询</button>
+            <button class="layui-btn layui-btn-sm" style="background-color: #A48566" lay-event="add">新增</button>
+            <button class="layui-btn layui-btn-sm" style="background-color: #A48566" lay-event="edit">编辑</button>
+            <button class="layui-btn layui-btn-sm" style="background-color: #A48566" lay-event="del">删除</button>
+            <button class="layui-btn layui-btn-sm" style="background-color: #A48566" lay-event="query">查询</button>
         </div>
     </script>
 <div class="layui-form" style="margin-top: 25px">

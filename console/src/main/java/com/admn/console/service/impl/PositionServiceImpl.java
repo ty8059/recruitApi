@@ -20,6 +20,7 @@ public class PositionServiceImpl implements PositionService {
     @Autowired
     private TblPositionMapper positionMapper;
 
+    @Override
     public TblPosition getByPositionId(Integer positionId) {
         return positionMapper.getByPositionId(positionId);
     }
@@ -56,5 +57,14 @@ public class PositionServiceImpl implements PositionService {
         } else {
             return new ResultEntity(false, "修改职位失败");
         }
+    }
+
+    @Override
+    public ResultEntity delPosition(Integer positionId) {
+        Example example = new Example(TblPosition.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("positionId", positionId);
+        positionMapper.deleteByExample(example);
+        return new ResultEntity(true, "删除成功");
     }
 }

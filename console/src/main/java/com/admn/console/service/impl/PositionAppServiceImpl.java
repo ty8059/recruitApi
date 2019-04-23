@@ -10,6 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -20,6 +21,11 @@ public class PositionAppServiceImpl implements PositionAppService {
     private TblPositionAppMapper positionAppMapper;
 
     @Override
+    public TblPositionApp getAppByUserIdAndPositionIdAndResumeId(Integer userId, Integer positionId, Integer resumeId) {
+        return positionAppMapper.findAppByUserId(userId, positionId, resumeId);
+    }
+
+    @Override
     public Layui getAppByAppTimeAndStatus(String startTime, String endTime, String status, Page page) {
         PageHelper.startPage(page.getCurrPage(), page.getPageSize());
         List<TblPositionApp> list = positionAppMapper.findAppByAppTimeAndStatus(startTime, endTime, status);
@@ -28,7 +34,13 @@ public class PositionAppServiceImpl implements PositionAppService {
     }
 
     @Override
-    public ResultEntity processApp(Integer userId, Integer positionId, Integer resumeId, String status) {
-        return null;
+    public ResultEntity processApp(TblPositionApp positionApp) {
+        Example example = new Example(TblPositionApp.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("userId", positionApp.getUserId());
+        criteria.andEqualTo("positionId", positionApp.getPositionId());
+        criteria.andEqualTo("resumeId", positionApp.getResumeId());
+        positionAppMapper.updateByExampleSelective(positionApp, example);
+        return new ResultEntity(true, "修改成功");
     }
 }
