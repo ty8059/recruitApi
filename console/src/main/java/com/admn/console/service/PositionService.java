@@ -13,4 +13,6 @@ public interface PositionService {
     ResultEntity addPosition(TblPosition position);
 
     ResultEntity editPosition(TblPosition position);
+
+    ResultEntity delPosition(Integer positionId);
 }

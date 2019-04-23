@@ -96,6 +96,29 @@
                             }
                         });
                         break;
+                    case 'del':
+                        var data = checkStatus.data;
+                        if (data.length === 0) {
+                            layer.msg("请选中一条记录");
+                            return;
+                        }
+                        $.ajax({
+                            url: '${ctx}/position/delPosition',
+                            type: 'post',
+                            dataType: 'json',
+                            data: {
+                                positionId: data[0].positionId
+                            },
+                            success: function (result) {
+                                layer.msg(result.msg);
+                                table.reload('dataGrid', {
+                                    where: {
+                                        'positionName': positionName
+                                    }
+                                });
+                            }
+                        });
+                        break;
                     case 'query':
                         table.reload('dataGrid', {
                             where: {
@@ -115,6 +138,7 @@
         <div class="layui-btn-container">
             <button class="layui-btn layui-btn-sm" style="background-color: #A48566" lay-event="add">新增</button>
             <button class="layui-btn layui-btn-sm" style="background-color: #A48566" lay-event="edit">编辑</button>
+            <button class="layui-btn layui-btn-sm" style="background-color: #A48566" lay-event="del">删除</button>
             <button class="layui-btn layui-btn-sm" style="background-color: #A48566" lay-event="query">查询</button>
         </div>
     </script>

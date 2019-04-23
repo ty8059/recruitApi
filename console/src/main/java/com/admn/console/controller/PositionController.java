@@ -58,6 +58,14 @@ public class PositionController {
         return positionService.editPosition(position);
     }
 
+    @RequestMapping("delPosition")
+    public ResultEntity delPosition(Integer positionId) {
+        if (positionId == null) {
+            return new ResultEntity(false, "positionId不能为空");
+        }
+        return positionService.delPosition(positionId);
+    }
+
     @RequestMapping("dataGrid")
     public Layui dataGrid(@Valid Page page, BindingResult bindingResult, String positionName) {
         ResultEntity validResult = ResultUtil.validModel(bindingResult);
